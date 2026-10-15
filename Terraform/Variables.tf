@@ -1,6 +1,6 @@
 variable "cluster_name" {
   type    = string
-  default = "EKS-Performance-Cluster"
+  default = "Performance-Cluster"
 }
 
 
