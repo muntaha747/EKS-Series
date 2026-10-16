@@ -72,7 +72,7 @@ resource "aws_security_group" "EKS-API-Access-SG" {
   description = "Inbound traffic for the worker node only https"
   vpc_id      = aws_vpc.EKS_VPC.id
   tags = {
-    Name = "EKS-Worker-Node-Security-Group"
+    Name = "EKS-API-Access-SG"
     Env  = var.env
   }
   ingress {

@@ -1,6 +1,6 @@
 resource "aws_ec2_client_vpn_endpoint" "VPN_Client" {
   description            = "terraform-clientvpn-example"
-  server_certificate_arn = aws_acm_certificate.server_crt.arn
+  server_certificate_arn = aws_acm_certificate.server_cert.arn
   client_cidr_block      = var.client_cidr_block
   vpc_id = aws_vpc.EKS_VPC.id
   split_tunnel = true
@@ -12,8 +12,8 @@ resource "aws_ec2_client_vpn_endpoint" "VPN_Client" {
 
   connection_log_options {
     enabled               = true
-    cloudwatch_log_group  = aws_cloudwatch_log_group.lg.name
-    cloudwatch_log_stream = aws_cloudwatch_log_stream.ls.name
+    cloudwatch_log_group  = aws_cloudwatch_log_group.vpn_logs.name
+    cloudwatch_log_stream = aws_cloudwatch_log_stream.vpn_logs.name
   }
   session_timeout_hours = 8
 
