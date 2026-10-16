@@ -1,0 +1,1565 @@
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  [32m+[0m create[0m
+
+Terraform will perform the following actions:
+
+[1m  # module.eks.aws_acm_certificate.ca_crt[0m will be created
+[0m  [32m+[0m[0m resource "aws_acm_certificate" "ca_crt" {
+      [32m+[0m[0m arn                       = (known after apply)
+      [32m+[0m[0m certificate_body          = (known after apply)
+      [32m+[0m[0m domain_name               = (known after apply)
+      [32m+[0m[0m domain_validation_options = (known after apply)
+      [32m+[0m[0m id                        = (known after apply)
+      [32m+[0m[0m key_algorithm             = (known after apply)
+      [32m+[0m[0m not_after                 = (known after apply)
+      [32m+[0m[0m not_before                = (known after apply)
+      [32m+[0m[0m pending_renewal           = (known after apply)
+      [32m+[0m[0m private_key               = (sensitive value)
+      [32m+[0m[0m private_key_wo            = (write-only attribute)
+      [32m+[0m[0m region                    = "us-east-1"
+      [32m+[0m[0m renewal_eligibility       = (known after apply)
+      [32m+[0m[0m renewal_summary           = (known after apply)
+      [32m+[0m[0m status                    = (known after apply)
+      [32m+[0m[0m subject_alternative_names = (known after apply)
+      [32m+[0m[0m tags                      = {
+          [32m+[0m[0m "Key" = "ca-cred"
+        }
+      [32m+[0m[0m tags_all                  = {
+          [32m+[0m[0m "Key" = "ca-cred"
+        }
+      [32m+[0m[0m type                      = (known after apply)
+      [32m+[0m[0m validation_emails         = (known after apply)
+      [32m+[0m[0m validation_method         = (known after apply)
+
+      [32m+[0m[0m options (known after apply)
+    }
+
+[1m  # module.eks.aws_acm_certificate.client_cert[0m will be created
+[0m  [32m+[0m[0m resource "aws_acm_certificate" "client_cert" {
+      [32m+[0m[0m arn                       = (known after apply)
+      [32m+[0m[0m certificate_body          = (known after apply)
+      [32m+[0m[0m certificate_chain         = (known after apply)
+      [32m+[0m[0m domain_name               = (known after apply)
+      [32m+[0m[0m domain_validation_options = (known after apply)
+      [32m+[0m[0m id                        = (known after apply)
+      [32m+[0m[0m key_algorithm             = (known after apply)
+      [32m+[0m[0m not_after                 = (known after apply)
+      [32m+[0m[0m not_before                = (known after apply)
+      [32m+[0m[0m pending_renewal           = (known after apply)
+      [32m+[0m[0m private_key               = (sensitive value)
+      [32m+[0m[0m private_key_wo            = (write-only attribute)
+      [32m+[0m[0m region                    = "us-east-1"
+      [32m+[0m[0m renewal_eligibility       = (known after apply)
+      [32m+[0m[0m renewal_summary           = (known after apply)
+      [32m+[0m[0m status                    = (known after apply)
+      [32m+[0m[0m subject_alternative_names = (known after apply)
+      [32m+[0m[0m tags                      = {
+          [32m+[0m[0m "Key" = "client-cred"
+        }
+      [32m+[0m[0m tags_all                  = {
+          [32m+[0m[0m "Key" = "client-cred"
+        }
+      [32m+[0m[0m type                      = (known after apply)
+      [32m+[0m[0m validation_emails         = (known after apply)
+      [32m+[0m[0m validation_method         = (known after apply)
+
+      [32m+[0m[0m options (known after apply)
+    }
+
+[1m  # module.eks.aws_acm_certificate.server_cert[0m will be created
+[0m  [32m+[0m[0m resource "aws_acm_certificate" "server_cert" {
+      [32m+[0m[0m arn                       = (known after apply)
+      [32m+[0m[0m certificate_body          = (known after apply)
+      [32m+[0m[0m certificate_chain         = (known after apply)
+      [32m+[0m[0m domain_name               = (known after apply)
+      [32m+[0m[0m domain_validation_options = (known after apply)
+      [32m+[0m[0m id                        = (known after apply)
+      [32m+[0m[0m key_algorithm             = (known after apply)
+      [32m+[0m[0m not_after                 = (known after apply)
+      [32m+[0m[0m not_before                = (known after apply)
+      [32m+[0m[0m pending_renewal           = (known after apply)
+      [32m+[0m[0m private_key               = (sensitive value)
+      [32m+[0m[0m private_key_wo            = (write-only attribute)
+      [32m+[0m[0m region                    = "us-east-1"
+      [32m+[0m[0m renewal_eligibility       = (known after apply)
+      [32m+[0m[0m renewal_summary           = (known after apply)
+      [32m+[0m[0m status                    = (known after apply)
+      [32m+[0m[0m subject_alternative_names = (known after apply)
+      [32m+[0m[0m tags                      = {
+          [32m+[0m[0m "Key" = "server-cred"
+        }
+      [32m+[0m[0m tags_all                  = {
+          [32m+[0m[0m "Key" = "server-cred"
+        }
+      [32m+[0m[0m type                      = (known after apply)
+      [32m+[0m[0m validation_emails         = (known after apply)
+      [32m+[0m[0m validation_method         = (known after apply)
+
+      [32m+[0m[0m options (known after apply)
+    }
+
+[1m  # module.eks.aws_cloudwatch_log_group.vpn_logs[0m will be created
+[0m  [32m+[0m[0m resource "aws_cloudwatch_log_group" "vpn_logs" {
+      [32m+[0m[0m arn                         = (known after apply)
+      [32m+[0m[0m deletion_protection_enabled = (known after apply)
+      [32m+[0m[0m id                          = (known after apply)
+      [32m+[0m[0m log_group_class             = (known after apply)
+      [32m+[0m[0m name                        = "/aws/vpn/eks-series.internal"
+      [32m+[0m[0m name_prefix                 = (known after apply)
+      [32m+[0m[0m region                      = "us-east-1"
+      [32m+[0m[0m retention_in_days           = 2192
+      [32m+[0m[0m skip_destroy                = false
+      [32m+[0m[0m tags_all                    = (known after apply)
+    }
+
+[1m  # module.eks.aws_cloudwatch_log_stream.vpn_logs[0m will be created
+[0m  [32m+[0m[0m resource "aws_cloudwatch_log_stream" "vpn_logs" {
+      [32m+[0m[0m arn            = (known after apply)
+      [32m+[0m[0m id             = (known after apply)
+      [32m+[0m[0m log_group_name = "/aws/vpn/eks-series.internal"
+      [32m+[0m[0m name           = "vpn-connection-logs"
+      [32m+[0m[0m region         = "us-east-1"
+    }
+
+[1m  # module.eks.aws_ec2_client_vpn_authorization_rule.vpn_auth_rule[0][0m will be created
+[0m  [32m+[0m[0m resource "aws_ec2_client_vpn_authorization_rule" "vpn_auth_rule" {
+      [32m+[0m[0m authorize_all_groups   = true
+      [32m+[0m[0m client_vpn_endpoint_id = (known after apply)
+      [32m+[0m[0m id                     = (known after apply)
+      [32m+[0m[0m region                 = "us-east-1"
+      [32m+[0m[0m target_network_cidr    = "10.0.6.0/24"
+    }
+
+[1m  # module.eks.aws_ec2_client_vpn_authorization_rule.vpn_auth_rule[1][0m will be created
+[0m  [32m+[0m[0m resource "aws_ec2_client_vpn_authorization_rule" "vpn_auth_rule" {
+      [32m+[0m[0m authorize_all_groups   = true
+      [32m+[0m[0m client_vpn_endpoint_id = (known after apply)
+      [32m+[0m[0m id                     = (known after apply)
+      [32m+[0m[0m region                 = "us-east-1"
+      [32m+[0m[0m target_network_cidr    = "10.0.7.0/24"
+    }
+
+[1m  # module.eks.aws_ec2_client_vpn_authorization_rule.vpn_auth_rule[2][0m will be created
+[0m  [32m+[0m[0m resource "aws_ec2_client_vpn_authorization_rule" "vpn_auth_rule" {
+      [32m+[0m[0m authorize_all_groups   = true
+      [32m+[0m[0m client_vpn_endpoint_id = (known after apply)
+      [32m+[0m[0m id                     = (known after apply)
+      [32m+[0m[0m region                 = "us-east-1"
+      [32m+[0m[0m target_network_cidr    = "10.0.8.0/24"
+    }
+
+[1m  # module.eks.aws_ec2_client_vpn_authorization_rule.vpn_auth_rule[3][0m will be created
+[0m  [32m+[0m[0m resource "aws_ec2_client_vpn_authorization_rule" "vpn_auth_rule" {
+      [32m+[0m[0m authorize_all_groups   = true
+      [32m+[0m[0m client_vpn_endpoint_id = (known after apply)
+      [32m+[0m[0m id                     = (known after apply)
+      [32m+[0m[0m region                 = "us-east-1"
+      [32m+[0m[0m target_network_cidr    = "10.0.9.0/24"
+    }
+
+[1m  # module.eks.aws_ec2_client_vpn_authorization_rule.vpn_auth_rule[4][0m will be created
+[0m  [32m+[0m[0m resource "aws_ec2_client_vpn_authorization_rule" "vpn_auth_rule" {
+      [32m+[0m[0m authorize_all_groups   = true
+      [32m+[0m[0m client_vpn_endpoint_id = (known after apply)
+      [32m+[0m[0m id                     = (known after apply)
+      [32m+[0m[0m region                 = "us-east-1"
+      [32m+[0m[0m target_network_cidr    = "10.0.10.0/24"
+    }
+
+[1m  # module.eks.aws_ec2_client_vpn_authorization_rule.vpn_auth_rule[5][0m will be created
+[0m  [32m+[0m[0m resource "aws_ec2_client_vpn_authorization_rule" "vpn_auth_rule" {
+      [32m+[0m[0m authorize_all_groups   = true
+      [32m+[0m[0m client_vpn_endpoint_id = (known after apply)
+      [32m+[0m[0m id                     = (known after apply)
+      [32m+[0m[0m region                 = "us-east-1"
+      [32m+[0m[0m target_network_cidr    = "10.0.11.0/24"
+    }
+
+[1m  # module.eks.aws_ec2_client_vpn_endpoint.VPN_Client[0m will be created
+[0m  [32m+[0m[0m resource "aws_ec2_client_vpn_endpoint" "VPN_Client" {
+      [32m+[0m[0m arn                           = (known after apply)
+      [32m+[0m[0m client_cidr_block             = "10.100.0.0/22"
+      [32m+[0m[0m description                   = "terraform-clientvpn-example"
+      [32m+[0m[0m disconnect_on_session_timeout = (known after apply)
+      [32m+[0m[0m dns_name                      = (known after apply)
+      [32m+[0m[0m endpoint_ip_address_type      = (known after apply)
+      [32m+[0m[0m id                            = (known after apply)
+      [32m+[0m[0m region                        = "us-east-1"
+      [32m+[0m[0m security_group_ids            = (known after apply)
+      [32m+[0m[0m self_service_portal           = "disabled"
+      [32m+[0m[0m self_service_portal_url       = (known after apply)
+      [32m+[0m[0m server_certificate_arn        = (known after apply)
+      [32m+[0m[0m session_timeout_hours         = 8
+      [32m+[0m[0m split_tunnel                  = true
+      [32m+[0m[0m tags_all                      = (known after apply)
+      [32m+[0m[0m traffic_ip_address_type       = (known after apply)
+      [32m+[0m[0m transport_protocol            = "udp"
+      [32m+[0m[0m vpc_id                        = (known after apply)
+      [32m+[0m[0m vpn_port                      = 443
+
+      [32m+[0m[0m authentication_options {
+          [32m+[0m[0m root_certificate_chain_arn     = (known after apply)
+          [32m+[0m[0m type                           = "certificate-authentication"
+            [90m# (3 unchanged attributes hidden)[0m[0m
+        }
+
+      [32m+[0m[0m client_connect_options (known after apply)
+
+      [32m+[0m[0m client_login_banner_options {
+          [32m+[0m[0m banner_text = "This AWS VPN is for authorized users only"
+          [32m+[0m[0m enabled     = true
+        }
+
+      [32m+[0m[0m client_route_enforcement_options (known after apply)
+
+      [32m+[0m[0m connection_log_options {
+          [32m+[0m[0m cloudwatch_log_group  = "/aws/vpn/eks-series.internal"
+          [32m+[0m[0m cloudwatch_log_stream = "vpn-connection-logs"
+          [32m+[0m[0m enabled               = true
+        }
+
+      [32m+[0m[0m transit_gateway_configuration (known after apply)
+    }
+
+[1m  # module.eks.aws_ec2_client_vpn_network_association.vpn-subnet-association[0][0m will be created
+[0m  [32m+[0m[0m resource "aws_ec2_client_vpn_network_association" "vpn-subnet-association" {
+      [32m+[0m[0m association_id         = (known after apply)
+      [32m+[0m[0m client_vpn_endpoint_id = (known after apply)
+      [32m+[0m[0m id                     = (known after apply)
+      [32m+[0m[0m region                 = "us-east-1"
+      [32m+[0m[0m subnet_id              = (known after apply)
+      [32m+[0m[0m vpc_id                 = (known after apply)
+    }
+
+[1m  # module.eks.aws_ec2_client_vpn_network_association.vpn-subnet-association[1][0m will be created
+[0m  [32m+[0m[0m resource "aws_ec2_client_vpn_network_association" "vpn-subnet-association" {
+      [32m+[0m[0m association_id         = (known after apply)
+      [32m+[0m[0m client_vpn_endpoint_id = (known after apply)
+      [32m+[0m[0m id                     = (known after apply)
+      [32m+[0m[0m region                 = "us-east-1"
+      [32m+[0m[0m subnet_id              = (known after apply)
+      [32m+[0m[0m vpc_id                 = (known after apply)
+    }
+
+[1m  # module.eks.aws_ec2_client_vpn_network_association.vpn-subnet-association[2][0m will be created
+[0m  [32m+[0m[0m resource "aws_ec2_client_vpn_network_association" "vpn-subnet-association" {
+      [32m+[0m[0m association_id         = (known after apply)
+      [32m+[0m[0m client_vpn_endpoint_id = (known after apply)
+      [32m+[0m[0m id                     = (known after apply)
+      [32m+[0m[0m region                 = "us-east-1"
+      [32m+[0m[0m subnet_id              = (known after apply)
+      [32m+[0m[0m vpc_id                 = (known after apply)
+    }
+
+[1m  # module.eks.aws_ec2_client_vpn_network_association.vpn-subnet-association[3][0m will be created
+[0m  [32m+[0m[0m resource "aws_ec2_client_vpn_network_association" "vpn-subnet-association" {
+      [32m+[0m[0m association_id         = (known after apply)
+      [32m+[0m[0m client_vpn_endpoint_id = (known after apply)
+      [32m+[0m[0m id                     = (known after apply)
+      [32m+[0m[0m region                 = "us-east-1"
+      [32m+[0m[0m subnet_id              = (known after apply)
+      [32m+[0m[0m vpc_id                 = (known after apply)
+    }
+
+[1m  # module.eks.aws_ec2_client_vpn_network_association.vpn-subnet-association[4][0m will be created
+[0m  [32m+[0m[0m resource "aws_ec2_client_vpn_network_association" "vpn-subnet-association" {
+      [32m+[0m[0m association_id         = (known after apply)
+      [32m+[0m[0m client_vpn_endpoint_id = (known after apply)
+      [32m+[0m[0m id                     = (known after apply)
+      [32m+[0m[0m region                 = "us-east-1"
+      [32m+[0m[0m subnet_id              = (known after apply)
+      [32m+[0m[0m vpc_id                 = (known after apply)
+    }
+
+[1m  # module.eks.aws_ec2_client_vpn_network_association.vpn-subnet-association[5][0m will be created
+[0m  [32m+[0m[0m resource "aws_ec2_client_vpn_network_association" "vpn-subnet-association" {
+      [32m+[0m[0m association_id         = (known after apply)
+      [32m+[0m[0m client_vpn_endpoint_id = (known after apply)
+      [32m+[0m[0m id                     = (known after apply)
+      [32m+[0m[0m region                 = "us-east-1"
+      [32m+[0m[0m subnet_id              = (known after apply)
+      [32m+[0m[0m vpc_id                 = (known after apply)
+    }
+
+[1m  # module.eks.aws_eip.nat_eip[0][0m will be created
+[0m  [32m+[0m[0m resource "aws_eip" "nat_eip" {
+      [32m+[0m[0m allocation_id        = (known after apply)
+      [32m+[0m[0m arn                  = (known after apply)
+      [32m+[0m[0m association_id       = (known after apply)
+      [32m+[0m[0m carrier_ip           = (known after apply)
+      [32m+[0m[0m customer_owned_ip    = (known after apply)
+      [32m+[0m[0m domain               = "vpc"
+      [32m+[0m[0m id                   = (known after apply)
+      [32m+[0m[0m instance             = (known after apply)
+      [32m+[0m[0m ipam_pool_id         = (known after apply)
+      [32m+[0m[0m network_border_group = (known after apply)
+      [32m+[0m[0m network_interface    = (known after apply)
+      [32m+[0m[0m private_dns          = (known after apply)
+      [32m+[0m[0m private_ip           = (known after apply)
+      [32m+[0m[0m ptr_record           = (known after apply)
+      [32m+[0m[0m public_dns           = (known after apply)
+      [32m+[0m[0m public_ip            = (known after apply)
+      [32m+[0m[0m public_ipv4_pool     = (known after apply)
+      [32m+[0m[0m region               = "us-east-1"
+      [32m+[0m[0m tags                 = {
+          [32m+[0m[0m "Env"  = "Dev"
+          [32m+[0m[0m "Name" = "EKS-NAT-EIP-1"
+        }
+      [32m+[0m[0m tags_all             = {
+          [32m+[0m[0m "Env"  = "Dev"
+          [32m+[0m[0m "Name" = "EKS-NAT-EIP-1"
+        }
+    }
+
+[1m  # module.eks.aws_eip.nat_eip[1][0m will be created
+[0m  [32m+[0m[0m resource "aws_eip" "nat_eip" {
+      [32m+[0m[0m allocation_id        = (known after apply)
+      [32m+[0m[0m arn                  = (known after apply)
+      [32m+[0m[0m association_id       = (known after apply)
+      [32m+[0m[0m carrier_ip           = (known after apply)
+      [32m+[0m[0m customer_owned_ip    = (known after apply)
+      [32m+[0m[0m domain               = "vpc"
+      [32m+[0m[0m id                   = (known after apply)
+      [32m+[0m[0m instance             = (known after apply)
+      [32m+[0m[0m ipam_pool_id         = (known after apply)
+      [32m+[0m[0m network_border_group = (known after apply)
+      [32m+[0m[0m network_interface    = (known after apply)
+      [32m+[0m[0m private_dns          = (known after apply)
+      [32m+[0m[0m private_ip           = (known after apply)
+      [32m+[0m[0m ptr_record           = (known after apply)
+      [32m+[0m[0m public_dns           = (known after apply)
+      [32m+[0m[0m public_ip            = (known after apply)
+      [32m+[0m[0m public_ipv4_pool     = (known after apply)
+      [32m+[0m[0m region               = "us-east-1"
+      [32m+[0m[0m tags                 = {
+          [32m+[0m[0m "Env"  = "Dev"
+          [32m+[0m[0m "Name" = "EKS-NAT-EIP-2"
+        }
+      [32m+[0m[0m tags_all             = {
+          [32m+[0m[0m "Env"  = "Dev"
+          [32m+[0m[0m "Name" = "EKS-NAT-EIP-2"
+        }
+    }
+
+[1m  # module.eks.aws_eks_cluster.EKS-Control-Plane[0m will be created
+[0m  [32m+[0m[0m resource "aws_eks_cluster" "EKS-Control-Plane" {
+      [32m+[0m[0m arn                           = (known after apply)
+      [32m+[0m[0m bootstrap_self_managed_addons = true
+      [32m+[0m[0m certificate_authority         = (known after apply)
+      [32m+[0m[0m cluster_id                    = (known after apply)
+      [32m+[0m[0m created_at                    = (known after apply)
+      [32m+[0m[0m deletion_protection           = (known after apply)
+      [32m+[0m[0m endpoint                      = (known after apply)
+      [32m+[0m[0m id                            = (known after apply)
+      [32m+[0m[0m identity                      = (known after apply)
+      [32m+[0m[0m name                          = "Dev-YT-Performance-Cluster"
+      [32m+[0m[0m platform_version              = (known after apply)
+      [32m+[0m[0m region                        = "us-east-1"
+      [32m+[0m[0m role_arn                      = (known after apply)
+      [32m+[0m[0m status                        = (known after apply)
+      [32m+[0m[0m tags                          = {
+          [32m+[0m[0m "Env"  = "Dev"
+          [32m+[0m[0m "Name" = "EKS-Control-Plane-Dev-YT-Performance-Cluster"
+        }
+      [32m+[0m[0m tags_all                      = {
+          [32m+[0m[0m "Env"  = "Dev"
+          [32m+[0m[0m "Name" = "EKS-Control-Plane-Dev-YT-Performance-Cluster"
+        }
+      [32m+[0m[0m version                       = "1.37"
+
+      [32m+[0m[0m access_config {
+          [32m+[0m[0m authentication_mode                         = "API"
+          [32m+[0m[0m bootstrap_cluster_creator_admin_permissions = true
+        }
+
+      [32m+[0m[0m compute_config (known after apply)
+
+      [32m+[0m[0m control_plane_scaling_config (known after apply)
+
+      [32m+[0m[0m kube_api_server_config (known after apply)
+
+      [32m+[0m[0m kube_controller_manager_config (known after apply)
+
+      [32m+[0m[0m kube_scheduler_config (known after apply)
+
+      [32m+[0m[0m kubernetes_network_config (known after apply)
+
+      [32m+[0m[0m storage_config (known after apply)
+
+      [32m+[0m[0m upgrade_policy (known after apply)
+
+      [32m+[0m[0m vpc_config {
+          [32m+[0m[0m cluster_security_group_id = (known after apply)
+          [32m+[0m[0m control_plane_egress_mode = (known after apply)
+          [32m+[0m[0m endpoint_private_access   = true
+          [32m+[0m[0m endpoint_public_access    = false
+          [32m+[0m[0m public_access_cidrs       = (known after apply)
+          [32m+[0m[0m security_group_ids        = (known after apply)
+          [32m+[0m[0m subnet_ids                = (known after apply)
+          [32m+[0m[0m vpc_id                    = (known after apply)
+        }
+    }
+
+[1m  # module.eks.aws_iam_role.EKS-Performance-Cluster-Role[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role" "EKS-Performance-Cluster-Role" {
+      [32m+[0m[0m arn                   = (known after apply)
+      [32m+[0m[0m assume_role_policy    = jsonencode(
+            {
+              [32m+[0m[0m Statement = [
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action    = "sts:AssumeRole"
+                      [32m+[0m[0m Effect    = "Allow"
+                      [32m+[0m[0m Principal = {
+                          [32m+[0m[0m Service = "eks.amazonaws.com"
+                        }
+                      [32m+[0m[0m Sid       = ""
+                    },
+                ]
+              [32m+[0m[0m Version   = "2012-10-17"
+            }
+        )
+      [32m+[0m[0m create_date           = (known after apply)
+      [32m+[0m[0m force_detach_policies = false
+      [32m+[0m[0m id                    = (known after apply)
+      [32m+[0m[0m managed_policy_arns   = (known after apply)
+      [32m+[0m[0m max_session_duration  = 3600
+      [32m+[0m[0m name                  = (known after apply)
+      [32m+[0m[0m name_prefix           = (known after apply)
+      [32m+[0m[0m path                  = "/"
+      [32m+[0m[0m tags                  = (known after apply)
+      [32m+[0m[0m tags_all              = (known after apply)
+      [32m+[0m[0m unique_id             = (known after apply)
+
+      [32m+[0m[0m inline_policy (known after apply)
+    }
+
+[1m  # module.eks.aws_iam_role.EKS-Performance-Worker-Node-Role[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role" "EKS-Performance-Worker-Node-Role" {
+      [32m+[0m[0m arn                   = (known after apply)
+      [32m+[0m[0m assume_role_policy    = jsonencode(
+            {
+              [32m+[0m[0m Statement = [
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action    = "sts:AssumeRole"
+                      [32m+[0m[0m Effect    = "Allow"
+                      [32m+[0m[0m Principal = {
+                          [32m+[0m[0m Service = "ec2.amazonaws.com"
+                        }
+                      [32m+[0m[0m Sid       = ""
+                    },
+                ]
+              [32m+[0m[0m Version   = "2012-10-17"
+            }
+        )
+      [32m+[0m[0m create_date           = (known after apply)
+      [32m+[0m[0m force_detach_policies = false
+      [32m+[0m[0m id                    = (known after apply)
+      [32m+[0m[0m managed_policy_arns   = (known after apply)
+      [32m+[0m[0m max_session_duration  = 3600
+      [32m+[0m[0m name                  = (known after apply)
+      [32m+[0m[0m name_prefix           = (known after apply)
+      [32m+[0m[0m path                  = "/"
+      [32m+[0m[0m tags                  = (known after apply)
+      [32m+[0m[0m tags_all              = (known after apply)
+      [32m+[0m[0m unique_id             = (known after apply)
+
+      [32m+[0m[0m inline_policy (known after apply)
+    }
+
+[1m  # module.eks.aws_iam_role_policy_attachment.AmazonEC2ContainerRegistryReadOnly[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role_policy_attachment" "AmazonEC2ContainerRegistryReadOnly" {
+      [32m+[0m[0m id         = (known after apply)
+      [32m+[0m[0m policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+      [32m+[0m[0m role       = (known after apply)
+    }
+
+[1m  # module.eks.aws_iam_role_policy_attachment.AmazonEKSWorkerNodePolicy[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role_policy_attachment" "AmazonEKSWorkerNodePolicy" {
+      [32m+[0m[0m id         = (known after apply)
+      [32m+[0m[0m policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
+      [32m+[0m[0m role       = (known after apply)
+    }
+
+[1m  # module.eks.aws_iam_role_policy_attachment.AmazonEKS_CNI_Policy[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role_policy_attachment" "AmazonEKS_CNI_Policy" {
+      [32m+[0m[0m id         = (known after apply)
+      [32m+[0m[0m policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
+      [32m+[0m[0m role       = (known after apply)
+    }
+
+[1m  # module.eks.aws_iam_role_policy_attachment.EKS_CLUSTER_POLICY_ATTACHMENT[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role_policy_attachment" "EKS_CLUSTER_POLICY_ATTACHMENT" {
+      [32m+[0m[0m id         = (known after apply)
+      [32m+[0m[0m policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
+      [32m+[0m[0m role       = (known after apply)
+    }
+
+[1m  # module.eks.aws_internet_gateway.Internet_Gateway[0m will be created
+[0m  [32m+[0m[0m resource "aws_internet_gateway" "Internet_Gateway" {
+      [32m+[0m[0m arn      = (known after apply)
+      [32m+[0m[0m id       = (known after apply)
+      [32m+[0m[0m owner_id = (known after apply)
+      [32m+[0m[0m region   = "us-east-1"
+      [32m+[0m[0m tags     = {
+          [32m+[0m[0m "Env"                                              = "Dev"
+          [32m+[0m[0m "Name"                                             = "Dev-YT-Performance-EKS-IGW"
+          [32m+[0m[0m "kubernetes.io/cluster/Dev-YT-Performance-Cluster" = "owned"
+        }
+      [32m+[0m[0m tags_all = {
+          [32m+[0m[0m "Env"                                              = "Dev"
+          [32m+[0m[0m "Name"                                             = "Dev-YT-Performance-EKS-IGW"
+          [32m+[0m[0m "kubernetes.io/cluster/Dev-YT-Performance-Cluster" = "owned"
+        }
+      [32m+[0m[0m vpc_id   = (known after apply)
+    }
+
+[1m  # module.eks.aws_nat_gateway.NAT_Gateway[0][0m will be created
+[0m  [32m+[0m[0m resource "aws_nat_gateway" "NAT_Gateway" {
+      [32m+[0m[0m allocation_id                      = (known after apply)
+      [32m+[0m[0m association_id                     = (known after apply)
+      [32m+[0m[0m auto_provision_zones               = (known after apply)
+      [32m+[0m[0m auto_scaling_ips                   = (known after apply)
+      [32m+[0m[0m availability_mode                  = (known after apply)
+      [32m+[0m[0m connectivity_type                  = "public"
+      [32m+[0m[0m id                                 = (known after apply)
+      [32m+[0m[0m network_interface_id               = (known after apply)
+      [32m+[0m[0m private_ip                         = (known after apply)
+      [32m+[0m[0m public_ip                          = (known after apply)
+      [32m+[0m[0m region                             = "us-east-1"
+      [32m+[0m[0m regional_nat_gateway_address       = (known after apply)
+      [32m+[0m[0m regional_nat_gateway_auto_mode     = (known after apply)
+      [32m+[0m[0m route_table_id                     = (known after apply)
+      [32m+[0m[0m secondary_allocation_ids           = (known after apply)
+      [32m+[0m[0m secondary_private_ip_address_count = (known after apply)
+      [32m+[0m[0m secondary_private_ip_addresses     = (known after apply)
+      [32m+[0m[0m subnet_id                          = (known after apply)
+      [32m+[0m[0m tags                               = {
+          [32m+[0m[0m "Env"  = "Dev"
+          [32m+[0m[0m "Name" = "EKS-NAT-1"
+        }
+      [32m+[0m[0m tags_all                           = {
+          [32m+[0m[0m "Env"  = "Dev"
+          [32m+[0m[0m "Name" = "EKS-NAT-1"
+        }
+      [32m+[0m[0m vpc_id                             = (known after apply)
+    }
+
+[1m  # module.eks.aws_nat_gateway.NAT_Gateway[1][0m will be created
+[0m  [32m+[0m[0m resource "aws_nat_gateway" "NAT_Gateway" {
+      [32m+[0m[0m allocation_id                      = (known after apply)
+      [32m+[0m[0m association_id                     = (known after apply)
+      [32m+[0m[0m auto_provision_zones               = (known after apply)
+      [32m+[0m[0m auto_scaling_ips                   = (known after apply)
+      [32m+[0m[0m availability_mode                  = (known after apply)
+      [32m+[0m[0m connectivity_type                  = "public"
+      [32m+[0m[0m id                                 = (known after apply)
+      [32m+[0m[0m network_interface_id               = (known after apply)
+      [32m+[0m[0m private_ip                         = (known after apply)
+      [32m+[0m[0m public_ip                          = (known after apply)
+      [32m+[0m[0m region                             = "us-east-1"
+      [32m+[0m[0m regional_nat_gateway_address       = (known after apply)
+      [32m+[0m[0m regional_nat_gateway_auto_mode     = (known after apply)
+      [32m+[0m[0m route_table_id                     = (known after apply)
+      [32m+[0m[0m secondary_allocation_ids           = (known after apply)
+      [32m+[0m[0m secondary_private_ip_address_count = (known after apply)
+      [32m+[0m[0m secondary_private_ip_addresses     = (known after apply)
+      [32m+[0m[0m subnet_id                          = (known after apply)
+      [32m+[0m[0m tags                               = {
+          [32m+[0m[0m "Env"  = "Dev"
+          [32m+[0m[0m "Name" = "EKS-NAT-2"
+        }
+      [32m+[0m[0m tags_all                           = {
+          [32m+[0m[0m "Env"  = "Dev"
+          [32m+[0m[0m "Name" = "EKS-NAT-2"
+        }
+      [32m+[0m[0m vpc_id                             = (known after apply)
+    }
+
+[1m  # module.eks.aws_route_table.Private_Route_table[0][0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table" "Private_Route_table" {
+      [32m+[0m[0m arn              = (known after apply)
+      [32m+[0m[0m id               = (known after apply)
+      [32m+[0m[0m owner_id         = (known after apply)
+      [32m+[0m[0m propagating_vgws = (known after apply)
+      [32m+[0m[0m region           = "us-east-1"
+      [32m+[0m[0m route            = [
+          [32m+[0m[0m {
+              [32m+[0m[0m cidr_block                 = "0.0.0.0/0"
+              [32m+[0m[0m nat_gateway_id             = (known after apply)
+                [90m# (12 unchanged attributes hidden)[0m[0m
+            },
+        ]
+      [32m+[0m[0m tags             = {
+          [32m+[0m[0m "Env"  = "Dev"
+          [32m+[0m[0m "Name" = "EKS-Private-RT-1"
+        }
+      [32m+[0m[0m tags_all         = {
+          [32m+[0m[0m "Env"  = "Dev"
+          [32m+[0m[0m "Name" = "EKS-Private-RT-1"
+        }
+      [32m+[0m[0m vpc_id           = (known after apply)
+    }
+
+[1m  # module.eks.aws_route_table.Private_Route_table[1][0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table" "Private_Route_table" {
+      [32m+[0m[0m arn              = (known after apply)
+      [32m+[0m[0m id               = (known after apply)
+      [32m+[0m[0m owner_id         = (known after apply)
+      [32m+[0m[0m propagating_vgws = (known after apply)
+      [32m+[0m[0m region           = "us-east-1"
+      [32m+[0m[0m route            = [
+          [32m+[0m[0m {
+              [32m+[0m[0m cidr_block                 = "0.0.0.0/0"
+              [32m+[0m[0m nat_gateway_id             = (known after apply)
+                [90m# (12 unchanged attributes hidden)[0m[0m
+            },
+        ]
+      [32m+[0m[0m tags             = {
+          [32m+[0m[0m "Env"  = "Dev"
+          [32m+[0m[0m "Name" = "EKS-Private-RT-2"
+        }
+      [32m+[0m[0m tags_all         = {
+          [32m+[0m[0m "Env"  = "Dev"
+          [32m+[0m[0m "Name" = "EKS-Private-RT-2"
+        }
+      [32m+[0m[0m vpc_id           = (known after apply)
+    }
+
+[1m  # module.eks.aws_route_table.Public_Route_table[0][0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table" "Public_Route_table" {
+      [32m+[0m[0m arn              = (known after apply)
+      [32m+[0m[0m id               = (known after apply)
+      [32m+[0m[0m owner_id         = (known after apply)
+      [32m+[0m[0m propagating_vgws = (known after apply)
+      [32m+[0m[0m region           = "us-east-1"
+      [32m+[0m[0m route            = [
+          [32m+[0m[0m {
+              [32m+[0m[0m cidr_block                 = "0.0.0.0/0"
+              [32m+[0m[0m gateway_id                 = (known after apply)
+                [90m# (12 unchanged attributes hidden)[0m[0m
+            },
+        ]
+      [32m+[0m[0m tags             = {
+          [32m+[0m[0m "Env"  = "Dev"
+          [32m+[0m[0m "Name" = "Dev-YT-EKS-Private-Subnet-1"
+        }
+      [32m+[0m[0m tags_all         = {
+          [32m+[0m[0m "Env"  = "Dev"
+          [32m+[0m[0m "Name" = "Dev-YT-EKS-Private-Subnet-1"
+        }
+      [32m+[0m[0m vpc_id           = (known after apply)
+    }
+
+[1m  # module.eks.aws_route_table.Public_Route_table[1][0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table" "Public_Route_table" {
+      [32m+[0m[0m arn              = (known after apply)
+      [32m+[0m[0m id               = (known after apply)
+      [32m+[0m[0m owner_id         = (known after apply)
+      [32m+[0m[0m propagating_vgws = (known after apply)
+      [32m+[0m[0m region           = "us-east-1"
+      [32m+[0m[0m route            = [
+          [32m+[0m[0m {
+              [32m+[0m[0m cidr_block                 = "0.0.0.0/0"
+              [32m+[0m[0m gateway_id                 = (known after apply)
+                [90m# (12 unchanged attributes hidden)[0m[0m
+            },
+        ]
+      [32m+[0m[0m tags             = {
+          [32m+[0m[0m "Env"  = "Dev"
+          [32m+[0m[0m "Name" = "Dev-YT-EKS-Private-Subnet-2"
+        }
+      [32m+[0m[0m tags_all         = {
+          [32m+[0m[0m "Env"  = "Dev"
+          [32m+[0m[0m "Name" = "Dev-YT-EKS-Private-Subnet-2"
+        }
+      [32m+[0m[0m vpc_id           = (known after apply)
+    }
+
+[1m  # module.eks.aws_route_table.Public_Route_table[2][0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table" "Public_Route_table" {
+      [32m+[0m[0m arn              = (known after apply)
+      [32m+[0m[0m id               = (known after apply)
+      [32m+[0m[0m owner_id         = (known after apply)
+      [32m+[0m[0m propagating_vgws = (known after apply)
+      [32m+[0m[0m region           = "us-east-1"
+      [32m+[0m[0m route            = [
+          [32m+[0m[0m {
+              [32m+[0m[0m cidr_block                 = "0.0.0.0/0"
+              [32m+[0m[0m gateway_id                 = (known after apply)
+                [90m# (12 unchanged attributes hidden)[0m[0m
+            },
+        ]
+      [32m+[0m[0m tags             = {
+          [32m+[0m[0m "Env"  = "Dev"
+          [32m+[0m[0m "Name" = "Dev-YT-EKS-Private-Subnet-3"
+        }
+      [32m+[0m[0m tags_all         = {
+          [32m+[0m[0m "Env"  = "Dev"
+          [32m+[0m[0m "Name" = "Dev-YT-EKS-Private-Subnet-3"
+        }
+      [32m+[0m[0m vpc_id           = (known after apply)
+    }
+
+[1m  # module.eks.aws_route_table.Public_Route_table[3][0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table" "Public_Route_table" {
+      [32m+[0m[0m arn              = (known after apply)
+      [32m+[0m[0m id               = (known after apply)
+      [32m+[0m[0m owner_id         = (known after apply)
+      [32m+[0m[0m propagating_vgws = (known after apply)
+      [32m+[0m[0m region           = "us-east-1"
+      [32m+[0m[0m route            = [
+          [32m+[0m[0m {
+              [32m+[0m[0m cidr_block                 = "0.0.0.0/0"
+              [32m+[0m[0m gateway_id                 = (known after apply)
+                [90m# (12 unchanged attributes hidden)[0m[0m
+            },
+        ]
+      [32m+[0m[0m tags             = {
+          [32m+[0m[0m "Env"  = "Dev"
+          [32m+[0m[0m "Name" = "Dev-YT-EKS-Private-Subnet-4"
+        }
+      [32m+[0m[0m tags_all         = {
+          [32m+[0m[0m "Env"  = "Dev"
+          [32m+[0m[0m "Name" = "Dev-YT-EKS-Private-Subnet-4"
+        }
+      [32m+[0m[0m vpc_id           = (known after apply)
+    }
+
+[1m  # module.eks.aws_route_table.Public_Route_table[4][0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table" "Public_Route_table" {
+      [32m+[0m[0m arn              = (known after apply)
+      [32m+[0m[0m id               = (known after apply)
+      [32m+[0m[0m owner_id         = (known after apply)
+      [32m+[0m[0m propagating_vgws = (known after apply)
+      [32m+[0m[0m region           = "us-east-1"
+      [32m+[0m[0m route            = [
+          [32m+[0m[0m {
+              [32m+[0m[0m cidr_block                 = "0.0.0.0/0"
+              [32m+[0m[0m gateway_id                 = (known after apply)
+                [90m# (12 unchanged attributes hidden)[0m[0m
+            },
+        ]
+      [32m+[0m[0m tags             = {
+          [32m+[0m[0m "Env"  = "Dev"
+          [32m+[0m[0m "Name" = "Dev-YT-EKS-Private-Subnet-5"
+        }
+      [32m+[0m[0m tags_all         = {
+          [32m+[0m[0m "Env"  = "Dev"
+          [32m+[0m[0m "Name" = "Dev-YT-EKS-Private-Subnet-5"
+        }
+      [32m+[0m[0m vpc_id           = (known after apply)
+    }
+
+[1m  # module.eks.aws_route_table.Public_Route_table[5][0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table" "Public_Route_table" {
+      [32m+[0m[0m arn              = (known after apply)
+      [32m+[0m[0m id               = (known after apply)
+      [32m+[0m[0m owner_id         = (known after apply)
+      [32m+[0m[0m propagating_vgws = (known after apply)
+      [32m+[0m[0m region           = "us-east-1"
+      [32m+[0m[0m route            = [
+          [32m+[0m[0m {
+              [32m+[0m[0m cidr_block                 = "0.0.0.0/0"
+              [32m+[0m[0m gateway_id                 = (known after apply)
+                [90m# (12 unchanged attributes hidden)[0m[0m
+            },
+        ]
+      [32m+[0m[0m tags             = {
+          [32m+[0m[0m "Env"  = "Dev"
+          [32m+[0m[0m "Name" = "Dev-YT-EKS-Private-Subnet-6"
+        }
+      [32m+[0m[0m tags_all         = {
+          [32m+[0m[0m "Env"  = "Dev"
+          [32m+[0m[0m "Name" = "Dev-YT-EKS-Private-Subnet-6"
+        }
+      [32m+[0m[0m vpc_id           = (known after apply)
+    }
+
+[1m  # module.eks.aws_route_table_association.Public_route_table_association[0][0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table_association" "Public_route_table_association" {
+      [32m+[0m[0m id             = (known after apply)
+      [32m+[0m[0m region         = "us-east-1"
+      [32m+[0m[0m route_table_id = (known after apply)
+      [32m+[0m[0m subnet_id      = (known after apply)
+    }
+
+[1m  # module.eks.aws_route_table_association.Public_route_table_association[1][0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table_association" "Public_route_table_association" {
+      [32m+[0m[0m id             = (known after apply)
+      [32m+[0m[0m region         = "us-east-1"
+      [32m+[0m[0m route_table_id = (known after apply)
+      [32m+[0m[0m subnet_id      = (known after apply)
+    }
+
+[1m  # module.eks.aws_route_table_association.Public_route_table_association[2][0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table_association" "Public_route_table_association" {
+      [32m+[0m[0m id             = (known after apply)
+      [32m+[0m[0m region         = "us-east-1"
+      [32m+[0m[0m route_table_id = (known after apply)
+      [32m+[0m[0m subnet_id      = (known after apply)
+    }
+
+[1m  # module.eks.aws_route_table_association.Public_route_table_association[3][0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table_association" "Public_route_table_association" {
+      [32m+[0m[0m id             = (known after apply)
+      [32m+[0m[0m region         = "us-east-1"
+      [32m+[0m[0m route_table_id = (known after apply)
+      [32m+[0m[0m subnet_id      = (known after apply)
+    }
+
+[1m  # module.eks.aws_route_table_association.Public_route_table_association[4][0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table_association" "Public_route_table_association" {
+      [32m+[0m[0m id             = (known after apply)
+      [32m+[0m[0m region         = "us-east-1"
+      [32m+[0m[0m route_table_id = (known after apply)
+      [32m+[0m[0m subnet_id      = (known after apply)
+    }
+
+[1m  # module.eks.aws_route_table_association.Public_route_table_association[5][0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table_association" "Public_route_table_association" {
+      [32m+[0m[0m id             = (known after apply)
+      [32m+[0m[0m region         = "us-east-1"
+      [32m+[0m[0m route_table_id = (known after apply)
+      [32m+[0m[0m subnet_id      = (known after apply)
+    }
+
+[1m  # module.eks.aws_security_group.EKS-API-Access-SG[0m will be created
+[0m  [32m+[0m[0m resource "aws_security_group" "EKS-API-Access-SG" {
+      [32m+[0m[0m arn                    = (known after apply)
+      [32m+[0m[0m description            = "Inbound traffic for the worker node only https"
+      [32m+[0m[0m egress                 = [
+          [32m+[0m[0m {
+              [32m+[0m[0m cidr_blocks      = [
+                  [32m+[0m[0m "0.0.0.0/0",
+                ]
+              [32m+[0m[0m from_port        = 0
+              [32m+[0m[0m ipv6_cidr_blocks = []
+              [32m+[0m[0m prefix_list_ids  = []
+              [32m+[0m[0m protocol         = "-1"
+              [32m+[0m[0m security_groups  = []
+              [32m+[0m[0m self             = false
+              [32m+[0m[0m to_port          = 0
+                [90m# (1 unchanged attribute hidden)[0m[0m
+            },
+        ]
+      [32m+[0m[0m id                     = (known after apply)
+      [32m+[0m[0m ingress                = [
+          [32m+[0m[0m {
+              [32m+[0m[0m cidr_blocks      = [
+                  [32m+[0m[0m "10.100.0.0/22",
+                ]
+              [32m+[0m[0m from_port        = 443
+              [32m+[0m[0m ipv6_cidr_blocks = []
+              [32m+[0m[0m prefix_list_ids  = []
+              [32m+[0m[0m protocol         = "tcp"
+              [32m+[0m[0m security_groups  = []
+              [32m+[0m[0m self             = false
+              [32m+[0m[0m to_port          = 443
+                [90m# (1 unchanged attribute hidden)[0m[0m
+            },
+        ]
+      [32m+[0m[0m name                   = "Security group to access Kube-Api-Server"
+      [32m+[0m[0m name_prefix            = (known after apply)
+      [32m+[0m[0m owner_id               = (known after apply)
+      [32m+[0m[0m region                 = "us-east-1"
+      [32m+[0m[0m revoke_rules_on_delete = false
+      [32m+[0m[0m tags                   = {
+          [32m+[0m[0m "Env"  = "Dev"
+          [32m+[0m[0m "Name" = "EKS-API-Access-SG"
+        }
+      [32m+[0m[0m tags_all               = {
+          [32m+[0m[0m "Env"  = "Dev"
+          [32m+[0m[0m "Name" = "EKS-API-Access-SG"
+        }
+      [32m+[0m[0m vpc_id                 = (known after apply)
+    }
+
+[1m  # module.eks.aws_subnet.Private_Subnets[0][0m will be created
+[0m  [32m+[0m[0m resource "aws_subnet" "Private_Subnets" {
+      [32m+[0m[0m arn                                            = (known after apply)
+      [32m+[0m[0m assign_ipv6_address_on_creation                = false
+      [32m+[0m[0m availability_zone                              = "us-east-1a"
+      [32m+[0m[0m availability_zone_id                           = (known after apply)
+      [32m+[0m[0m cidr_block                                     = "10.0.6.0/24"
+      [32m+[0m[0m enable_dns64                                   = false
+      [32m+[0m[0m enable_resource_name_dns_a_record_on_launch    = false
+      [32m+[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false
+      [32m+[0m[0m id                                             = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block                                = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_association_id                 = (known after apply)
+      [32m+[0m[0m ipv6_native                                    = false
+      [32m+[0m[0m map_public_ip_on_launch                        = false
+      [32m+[0m[0m owner_id                                       = (known after apply)
+      [32m+[0m[0m private_dns_hostname_type_on_launch            = (known after apply)
+      [32m+[0m[0m region                                         = "us-east-1"
+      [32m+[0m[0m tags                                           = {
+          [32m+[0m[0m "Env"                                              = "Dev"
+          [32m+[0m[0m "Name"                                             = "Dev-YT-EKS-Private-Subnet-1"
+          [32m+[0m[0m "kubernetes.io/cluster/Dev-YT-Performance-Cluster" = "owned"
+          [32m+[0m[0m "kubernetes.io/role/internal-elb"                  = "1"
+        }
+      [32m+[0m[0m tags_all                                       = {
+          [32m+[0m[0m "Env"                                              = "Dev"
+          [32m+[0m[0m "Name"                                             = "Dev-YT-EKS-Private-Subnet-1"
+          [32m+[0m[0m "kubernetes.io/cluster/Dev-YT-Performance-Cluster" = "owned"
+          [32m+[0m[0m "kubernetes.io/role/internal-elb"                  = "1"
+        }
+      [32m+[0m[0m vpc_id                                         = (known after apply)
+    }
+
+[1m  # module.eks.aws_subnet.Private_Subnets[1][0m will be created
+[0m  [32m+[0m[0m resource "aws_subnet" "Private_Subnets" {
+      [32m+[0m[0m arn                                            = (known after apply)
+      [32m+[0m[0m assign_ipv6_address_on_creation                = false
+      [32m+[0m[0m availability_zone                              = "us-east-1b"
+      [32m+[0m[0m availability_zone_id                           = (known after apply)
+      [32m+[0m[0m cidr_block                                     = "10.0.7.0/24"
+      [32m+[0m[0m enable_dns64                                   = false
+      [32m+[0m[0m enable_resource_name_dns_a_record_on_launch    = false
+      [32m+[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false
+      [32m+[0m[0m id                                             = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block                                = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_association_id                 = (known after apply)
+      [32m+[0m[0m ipv6_native                                    = false
+      [32m+[0m[0m map_public_ip_on_launch                        = false
+      [32m+[0m[0m owner_id                                       = (known after apply)
+      [32m+[0m[0m private_dns_hostname_type_on_launch            = (known after apply)
+      [32m+[0m[0m region                                         = "us-east-1"
+      [32m+[0m[0m tags                                           = {
+          [32m+[0m[0m "Env"                                              = "Dev"
+          [32m+[0m[0m "Name"                                             = "Dev-YT-EKS-Private-Subnet-2"
+          [32m+[0m[0m "kubernetes.io/cluster/Dev-YT-Performance-Cluster" = "owned"
+          [32m+[0m[0m "kubernetes.io/role/internal-elb"                  = "1"
+        }
+      [32m+[0m[0m tags_all                                       = {
+          [32m+[0m[0m "Env"                                              = "Dev"
+          [32m+[0m[0m "Name"                                             = "Dev-YT-EKS-Private-Subnet-2"
+          [32m+[0m[0m "kubernetes.io/cluster/Dev-YT-Performance-Cluster" = "owned"
+          [32m+[0m[0m "kubernetes.io/role/internal-elb"                  = "1"
+        }
+      [32m+[0m[0m vpc_id                                         = (known after apply)
+    }
+
+[1m  # module.eks.aws_subnet.Private_Subnets[2][0m will be created
+[0m  [32m+[0m[0m resource "aws_subnet" "Private_Subnets" {
+      [32m+[0m[0m arn                                            = (known after apply)
+      [32m+[0m[0m assign_ipv6_address_on_creation                = false
+      [32m+[0m[0m availability_zone                              = "us-east-1c"
+      [32m+[0m[0m availability_zone_id                           = (known after apply)
+      [32m+[0m[0m cidr_block                                     = "10.0.8.0/24"
+      [32m+[0m[0m enable_dns64                                   = false
+      [32m+[0m[0m enable_resource_name_dns_a_record_on_launch    = false
+      [32m+[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false
+      [32m+[0m[0m id                                             = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block                                = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_association_id                 = (known after apply)
+      [32m+[0m[0m ipv6_native                                    = false
+      [32m+[0m[0m map_public_ip_on_launch                        = false
+      [32m+[0m[0m owner_id                                       = (known after apply)
+      [32m+[0m[0m private_dns_hostname_type_on_launch            = (known after apply)
+      [32m+[0m[0m region                                         = "us-east-1"
+      [32m+[0m[0m tags                                           = {
+          [32m+[0m[0m "Env"                                              = "Dev"
+          [32m+[0m[0m "Name"                                             = "Dev-YT-EKS-Private-Subnet-3"
+          [32m+[0m[0m "kubernetes.io/cluster/Dev-YT-Performance-Cluster" = "owned"
+          [32m+[0m[0m "kubernetes.io/role/internal-elb"                  = "1"
+        }
+      [32m+[0m[0m tags_all                                       = {
+          [32m+[0m[0m "Env"                                              = "Dev"
+          [32m+[0m[0m "Name"                                             = "Dev-YT-EKS-Private-Subnet-3"
+          [32m+[0m[0m "kubernetes.io/cluster/Dev-YT-Performance-Cluster" = "owned"
+          [32m+[0m[0m "kubernetes.io/role/internal-elb"                  = "1"
+        }
+      [32m+[0m[0m vpc_id                                         = (known after apply)
+    }
+
+[1m  # module.eks.aws_subnet.Private_Subnets[3][0m will be created
+[0m  [32m+[0m[0m resource "aws_subnet" "Private_Subnets" {
+      [32m+[0m[0m arn                                            = (known after apply)
+      [32m+[0m[0m assign_ipv6_address_on_creation                = false
+      [32m+[0m[0m availability_zone                              = "us-east-1d"
+      [32m+[0m[0m availability_zone_id                           = (known after apply)
+      [32m+[0m[0m cidr_block                                     = "10.0.9.0/24"
+      [32m+[0m[0m enable_dns64                                   = false
+      [32m+[0m[0m enable_resource_name_dns_a_record_on_launch    = false
+      [32m+[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false
+      [32m+[0m[0m id                                             = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block                                = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_association_id                 = (known after apply)
+      [32m+[0m[0m ipv6_native                                    = false
+      [32m+[0m[0m map_public_ip_on_launch                        = false
+      [32m+[0m[0m owner_id                                       = (known after apply)
+      [32m+[0m[0m private_dns_hostname_type_on_launch            = (known after apply)
+      [32m+[0m[0m region                                         = "us-east-1"
+      [32m+[0m[0m tags                                           = {
+          [32m+[0m[0m "Env"                                              = "Dev"
+          [32m+[0m[0m "Name"                                             = "Dev-YT-EKS-Private-Subnet-4"
+          [32m+[0m[0m "kubernetes.io/cluster/Dev-YT-Performance-Cluster" = "owned"
+          [32m+[0m[0m "kubernetes.io/role/internal-elb"                  = "1"
+        }
+      [32m+[0m[0m tags_all                                       = {
+          [32m+[0m[0m "Env"                                              = "Dev"
+          [32m+[0m[0m "Name"                                             = "Dev-YT-EKS-Private-Subnet-4"
+          [32m+[0m[0m "kubernetes.io/cluster/Dev-YT-Performance-Cluster" = "owned"
+          [32m+[0m[0m "kubernetes.io/role/internal-elb"                  = "1"
+        }
+      [32m+[0m[0m vpc_id                                         = (known after apply)
+    }
+
+[1m  # module.eks.aws_subnet.Private_Subnets[4][0m will be created
+[0m  [32m+[0m[0m resource "aws_subnet" "Private_Subnets" {
+      [32m+[0m[0m arn                                            = (known after apply)
+      [32m+[0m[0m assign_ipv6_address_on_creation                = false
+      [32m+[0m[0m availability_zone                              = "us-east-1e"
+      [32m+[0m[0m availability_zone_id                           = (known after apply)
+      [32m+[0m[0m cidr_block                                     = "10.0.10.0/24"
+      [32m+[0m[0m enable_dns64                                   = false
+      [32m+[0m[0m enable_resource_name_dns_a_record_on_launch    = false
+      [32m+[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false
+      [32m+[0m[0m id                                             = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block                                = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_association_id                 = (known after apply)
+      [32m+[0m[0m ipv6_native                                    = false
+      [32m+[0m[0m map_public_ip_on_launch                        = false
+      [32m+[0m[0m owner_id                                       = (known after apply)
+      [32m+[0m[0m private_dns_hostname_type_on_launch            = (known after apply)
+      [32m+[0m[0m region                                         = "us-east-1"
+      [32m+[0m[0m tags                                           = {
+          [32m+[0m[0m "Env"                                              = "Dev"
+          [32m+[0m[0m "Name"                                             = "Dev-YT-EKS-Private-Subnet-5"
+          [32m+[0m[0m "kubernetes.io/cluster/Dev-YT-Performance-Cluster" = "owned"
+          [32m+[0m[0m "kubernetes.io/role/internal-elb"                  = "1"
+        }
+      [32m+[0m[0m tags_all                                       = {
+          [32m+[0m[0m "Env"                                              = "Dev"
+          [32m+[0m[0m "Name"                                             = "Dev-YT-EKS-Private-Subnet-5"
+          [32m+[0m[0m "kubernetes.io/cluster/Dev-YT-Performance-Cluster" = "owned"
+          [32m+[0m[0m "kubernetes.io/role/internal-elb"                  = "1"
+        }
+      [32m+[0m[0m vpc_id                                         = (known after apply)
+    }
+
+[1m  # module.eks.aws_subnet.Private_Subnets[5][0m will be created
+[0m  [32m+[0m[0m resource "aws_subnet" "Private_Subnets" {
+      [32m+[0m[0m arn                                            = (known after apply)
+      [32m+[0m[0m assign_ipv6_address_on_creation                = false
+      [32m+[0m[0m availability_zone                              = "us-east-1f"
+      [32m+[0m[0m availability_zone_id                           = (known after apply)
+      [32m+[0m[0m cidr_block                                     = "10.0.11.0/24"
+      [32m+[0m[0m enable_dns64                                   = false
+      [32m+[0m[0m enable_resource_name_dns_a_record_on_launch    = false
+      [32m+[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false
+      [32m+[0m[0m id                                             = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block                                = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_association_id                 = (known after apply)
+      [32m+[0m[0m ipv6_native                                    = false
+      [32m+[0m[0m map_public_ip_on_launch                        = false
+      [32m+[0m[0m owner_id                                       = (known after apply)
+      [32m+[0m[0m private_dns_hostname_type_on_launch            = (known after apply)
+      [32m+[0m[0m region                                         = "us-east-1"
+      [32m+[0m[0m tags                                           = {
+          [32m+[0m[0m "Env"                                              = "Dev"
+          [32m+[0m[0m "Name"                                             = "Dev-YT-EKS-Private-Subnet-6"
+          [32m+[0m[0m "kubernetes.io/cluster/Dev-YT-Performance-Cluster" = "owned"
+          [32m+[0m[0m "kubernetes.io/role/internal-elb"                  = "1"
+        }
+      [32m+[0m[0m tags_all                                       = {
+          [32m+[0m[0m "Env"                                              = "Dev"
+          [32m+[0m[0m "Name"                                             = "Dev-YT-EKS-Private-Subnet-6"
+          [32m+[0m[0m "kubernetes.io/cluster/Dev-YT-Performance-Cluster" = "owned"
+          [32m+[0m[0m "kubernetes.io/role/internal-elb"                  = "1"
+        }
+      [32m+[0m[0m vpc_id                                         = (known after apply)
+    }
+
+[1m  # module.eks.aws_subnet.Public_Subnets[0][0m will be created
+[0m  [32m+[0m[0m resource "aws_subnet" "Public_Subnets" {
+      [32m+[0m[0m arn                                            = (known after apply)
+      [32m+[0m[0m assign_ipv6_address_on_creation                = false
+      [32m+[0m[0m availability_zone                              = "us-east-1a"
+      [32m+[0m[0m availability_zone_id                           = (known after apply)
+      [32m+[0m[0m cidr_block                                     = "10.0.0.0/24"
+      [32m+[0m[0m enable_dns64                                   = false
+      [32m+[0m[0m enable_resource_name_dns_a_record_on_launch    = false
+      [32m+[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false
+      [32m+[0m[0m id                                             = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block                                = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_association_id                 = (known after apply)
+      [32m+[0m[0m ipv6_native                                    = false
+      [32m+[0m[0m map_public_ip_on_launch                        = true
+      [32m+[0m[0m owner_id                                       = (known after apply)
+      [32m+[0m[0m private_dns_hostname_type_on_launch            = (known after apply)
+      [32m+[0m[0m region                                         = "us-east-1"
+      [32m+[0m[0m tags                                           = {
+          [32m+[0m[0m "Env"                                              = "Dev"
+          [32m+[0m[0m "Name"                                             = "Dev-YT-EKS-Public-subnet-1"
+          [32m+[0m[0m "kubernetes.io/cluster/Dev-YT-Performance-Cluster" = "owned"
+          [32m+[0m[0m "kubernetes.io/role/elb"                           = "1"
+        }
+      [32m+[0m[0m tags_all                                       = {
+          [32m+[0m[0m "Env"                                              = "Dev"
+          [32m+[0m[0m "Name"                                             = "Dev-YT-EKS-Public-subnet-1"
+          [32m+[0m[0m "kubernetes.io/cluster/Dev-YT-Performance-Cluster" = "owned"
+          [32m+[0m[0m "kubernetes.io/role/elb"                           = "1"
+        }
+      [32m+[0m[0m vpc_id                                         = (known after apply)
+    }
+
+[1m  # module.eks.aws_subnet.Public_Subnets[1][0m will be created
+[0m  [32m+[0m[0m resource "aws_subnet" "Public_Subnets" {
+      [32m+[0m[0m arn                                            = (known after apply)
+      [32m+[0m[0m assign_ipv6_address_on_creation                = false
+      [32m+[0m[0m availability_zone                              = "us-east-1b"
+      [32m+[0m[0m availability_zone_id                           = (known after apply)
+      [32m+[0m[0m cidr_block                                     = "10.0.1.0/24"
+      [32m+[0m[0m enable_dns64                                   = false
+      [32m+[0m[0m enable_resource_name_dns_a_record_on_launch    = false
+      [32m+[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false
+      [32m+[0m[0m id                                             = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block                                = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_association_id                 = (known after apply)
+      [32m+[0m[0m ipv6_native                                    = false
+      [32m+[0m[0m map_public_ip_on_launch                        = true
+      [32m+[0m[0m owner_id                                       = (known after apply)
+      [32m+[0m[0m private_dns_hostname_type_on_launch            = (known after apply)
+      [32m+[0m[0m region                                         = "us-east-1"
+      [32m+[0m[0m tags                                           = {
+          [32m+[0m[0m "Env"                                              = "Dev"
+          [32m+[0m[0m "Name"                                             = "Dev-YT-EKS-Public-subnet-2"
+          [32m+[0m[0m "kubernetes.io/cluster/Dev-YT-Performance-Cluster" = "owned"
+          [32m+[0m[0m "kubernetes.io/role/elb"                           = "1"
+        }
+      [32m+[0m[0m tags_all                                       = {
+          [32m+[0m[0m "Env"                                              = "Dev"
+          [32m+[0m[0m "Name"                                             = "Dev-YT-EKS-Public-subnet-2"
+          [32m+[0m[0m "kubernetes.io/cluster/Dev-YT-Performance-Cluster" = "owned"
+          [32m+[0m[0m "kubernetes.io/role/elb"                           = "1"
+        }
+      [32m+[0m[0m vpc_id                                         = (known after apply)
+    }
+
+[1m  # module.eks.aws_subnet.Public_Subnets[2][0m will be created
+[0m  [32m+[0m[0m resource "aws_subnet" "Public_Subnets" {
+      [32m+[0m[0m arn                                            = (known after apply)
+      [32m+[0m[0m assign_ipv6_address_on_creation                = false
+      [32m+[0m[0m availability_zone                              = "us-east-1c"
+      [32m+[0m[0m availability_zone_id                           = (known after apply)
+      [32m+[0m[0m cidr_block                                     = "10.0.2.0/24"
+      [32m+[0m[0m enable_dns64                                   = false
+      [32m+[0m[0m enable_resource_name_dns_a_record_on_launch    = false
+      [32m+[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false
+      [32m+[0m[0m id                                             = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block                                = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_association_id                 = (known after apply)
+      [32m+[0m[0m ipv6_native                                    = false
+      [32m+[0m[0m map_public_ip_on_launch                        = true
+      [32m+[0m[0m owner_id                                       = (known after apply)
+      [32m+[0m[0m private_dns_hostname_type_on_launch            = (known after apply)
+      [32m+[0m[0m region                                         = "us-east-1"
+      [32m+[0m[0m tags                                           = {
+          [32m+[0m[0m "Env"                                              = "Dev"
+          [32m+[0m[0m "Name"                                             = "Dev-YT-EKS-Public-subnet-3"
+          [32m+[0m[0m "kubernetes.io/cluster/Dev-YT-Performance-Cluster" = "owned"
+          [32m+[0m[0m "kubernetes.io/role/elb"                           = "1"
+        }
+      [32m+[0m[0m tags_all                                       = {
+          [32m+[0m[0m "Env"                                              = "Dev"
+          [32m+[0m[0m "Name"                                             = "Dev-YT-EKS-Public-subnet-3"
+          [32m+[0m[0m "kubernetes.io/cluster/Dev-YT-Performance-Cluster" = "owned"
+          [32m+[0m[0m "kubernetes.io/role/elb"                           = "1"
+        }
+      [32m+[0m[0m vpc_id                                         = (known after apply)
+    }
+
+[1m  # module.eks.aws_subnet.Public_Subnets[3][0m will be created
+[0m  [32m+[0m[0m resource "aws_subnet" "Public_Subnets" {
+      [32m+[0m[0m arn                                            = (known after apply)
+      [32m+[0m[0m assign_ipv6_address_on_creation                = false
+      [32m+[0m[0m availability_zone                              = "us-east-1d"
+      [32m+[0m[0m availability_zone_id                           = (known after apply)
+      [32m+[0m[0m cidr_block                                     = "10.0.3.0/24"
+      [32m+[0m[0m enable_dns64                                   = false
+      [32m+[0m[0m enable_resource_name_dns_a_record_on_launch    = false
+      [32m+[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false
+      [32m+[0m[0m id                                             = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block                                = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_association_id                 = (known after apply)
+      [32m+[0m[0m ipv6_native                                    = false
+      [32m+[0m[0m map_public_ip_on_launch                        = true
+      [32m+[0m[0m owner_id                                       = (known after apply)
+      [32m+[0m[0m private_dns_hostname_type_on_launch            = (known after apply)
+      [32m+[0m[0m region                                         = "us-east-1"
+      [32m+[0m[0m tags                                           = {
+          [32m+[0m[0m "Env"                                              = "Dev"
+          [32m+[0m[0m "Name"                                             = "Dev-YT-EKS-Public-subnet-4"
+          [32m+[0m[0m "kubernetes.io/cluster/Dev-YT-Performance-Cluster" = "owned"
+          [32m+[0m[0m "kubernetes.io/role/elb"                           = "1"
+        }
+      [32m+[0m[0m tags_all                                       = {
+          [32m+[0m[0m "Env"                                              = "Dev"
+          [32m+[0m[0m "Name"                                             = "Dev-YT-EKS-Public-subnet-4"
+          [32m+[0m[0m "kubernetes.io/cluster/Dev-YT-Performance-Cluster" = "owned"
+          [32m+[0m[0m "kubernetes.io/role/elb"                           = "1"
+        }
+      [32m+[0m[0m vpc_id                                         = (known after apply)
+    }
+
+[1m  # module.eks.aws_subnet.Public_Subnets[4][0m will be created
+[0m  [32m+[0m[0m resource "aws_subnet" "Public_Subnets" {
+      [32m+[0m[0m arn                                            = (known after apply)
+      [32m+[0m[0m assign_ipv6_address_on_creation                = false
+      [32m+[0m[0m availability_zone                              = "us-east-1e"
+      [32m+[0m[0m availability_zone_id                           = (known after apply)
+      [32m+[0m[0m cidr_block                                     = "10.0.4.0/24"
+      [32m+[0m[0m enable_dns64                                   = false
+      [32m+[0m[0m enable_resource_name_dns_a_record_on_launch    = false
+      [32m+[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false
+      [32m+[0m[0m id                                             = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block                                = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_association_id                 = (known after apply)
+      [32m+[0m[0m ipv6_native                                    = false
+      [32m+[0m[0m map_public_ip_on_launch                        = true
+      [32m+[0m[0m owner_id                                       = (known after apply)
+      [32m+[0m[0m private_dns_hostname_type_on_launch            = (known after apply)
+      [32m+[0m[0m region                                         = "us-east-1"
+      [32m+[0m[0m tags                                           = {
+          [32m+[0m[0m "Env"                                              = "Dev"
+          [32m+[0m[0m "Name"                                             = "Dev-YT-EKS-Public-subnet-5"
+          [32m+[0m[0m "kubernetes.io/cluster/Dev-YT-Performance-Cluster" = "owned"
+          [32m+[0m[0m "kubernetes.io/role/elb"                           = "1"
+        }
+      [32m+[0m[0m tags_all                                       = {
+          [32m+[0m[0m "Env"                                              = "Dev"
+          [32m+[0m[0m "Name"                                             = "Dev-YT-EKS-Public-subnet-5"
+          [32m+[0m[0m "kubernetes.io/cluster/Dev-YT-Performance-Cluster" = "owned"
+          [32m+[0m[0m "kubernetes.io/role/elb"                           = "1"
+        }
+      [32m+[0m[0m vpc_id                                         = (known after apply)
+    }
+
+[1m  # module.eks.aws_subnet.Public_Subnets[5][0m will be created
+[0m  [32m+[0m[0m resource "aws_subnet" "Public_Subnets" {
+      [32m+[0m[0m arn                                            = (known after apply)
+      [32m+[0m[0m assign_ipv6_address_on_creation                = false
+      [32m+[0m[0m availability_zone                              = "us-east-1f"
+      [32m+[0m[0m availability_zone_id                           = (known after apply)
+      [32m+[0m[0m cidr_block                                     = "10.0.5.0/24"
+      [32m+[0m[0m enable_dns64                                   = false
+      [32m+[0m[0m enable_resource_name_dns_a_record_on_launch    = false
+      [32m+[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false
+      [32m+[0m[0m id                                             = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block                                = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_association_id                 = (known after apply)
+      [32m+[0m[0m ipv6_native                                    = false
+      [32m+[0m[0m map_public_ip_on_launch                        = true
+      [32m+[0m[0m owner_id                                       = (known after apply)
+      [32m+[0m[0m private_dns_hostname_type_on_launch            = (known after apply)
+      [32m+[0m[0m region                                         = "us-east-1"
+      [32m+[0m[0m tags                                           = {
+          [32m+[0m[0m "Env"                                              = "Dev"
+          [32m+[0m[0m "Name"                                             = "Dev-YT-EKS-Public-subnet-6"
+          [32m+[0m[0m "kubernetes.io/cluster/Dev-YT-Performance-Cluster" = "owned"
+          [32m+[0m[0m "kubernetes.io/role/elb"                           = "1"
+        }
+      [32m+[0m[0m tags_all                                       = {
+          [32m+[0m[0m "Env"                                              = "Dev"
+          [32m+[0m[0m "Name"                                             = "Dev-YT-EKS-Public-subnet-6"
+          [32m+[0m[0m "kubernetes.io/cluster/Dev-YT-Performance-Cluster" = "owned"
+          [32m+[0m[0m "kubernetes.io/role/elb"                           = "1"
+        }
+      [32m+[0m[0m vpc_id                                         = (known after apply)
+    }
+
+[1m  # module.eks.aws_vpc.EKS_VPC[0m will be created
+[0m  [32m+[0m[0m resource "aws_vpc" "EKS_VPC" {
+      [32m+[0m[0m arn                                  = (known after apply)
+      [32m+[0m[0m cidr_block                           = "10.0.0.0/16"
+      [32m+[0m[0m default_network_acl_id               = (known after apply)
+      [32m+[0m[0m default_route_table_id               = (known after apply)
+      [32m+[0m[0m default_security_group_id            = (known after apply)
+      [32m+[0m[0m dhcp_options_id                      = (known after apply)
+      [32m+[0m[0m enable_dns_hostnames                 = true
+      [32m+[0m[0m enable_dns_support                   = true
+      [32m+[0m[0m enable_network_address_usage_metrics = (known after apply)
+      [32m+[0m[0m id                                   = (known after apply)
+      [32m+[0m[0m instance_tenancy                     = "default"
+      [32m+[0m[0m ipv6_association_id                  = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block                      = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_network_border_group = (known after apply)
+      [32m+[0m[0m main_route_table_id                  = (known after apply)
+      [32m+[0m[0m owner_id                             = (known after apply)
+      [32m+[0m[0m region                               = "us-east-1"
+      [32m+[0m[0m tags                                 = {
+          [32m+[0m[0m "Env"  = "Dev"
+          [32m+[0m[0m "Name" = "Dev-YT-Performance-EKS-VPC"
+        }
+      [32m+[0m[0m tags_all                             = {
+          [32m+[0m[0m "Env"  = "Dev"
+          [32m+[0m[0m "Name" = "Dev-YT-Performance-EKS-VPC"
+        }
+    }
+
+[1m  # module.eks.local_file.ca_crt[0m will be created
+[0m  [32m+[0m[0m resource "local_file" "ca_crt" {
+      [32m+[0m[0m content              = (known after apply)
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
+      [32m+[0m[0m directory_permission = "0777"
+      [32m+[0m[0m file_permission      = "0777"
+      [32m+[0m[0m filename             = "certs/ca.crt"
+      [32m+[0m[0m id                   = (known after apply)
+    }
+
+[1m  # module.eks.local_file.client_crt[0m will be created
+[0m  [32m+[0m[0m resource "local_file" "client_crt" {
+      [32m+[0m[0m content              = (known after apply)
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
+      [32m+[0m[0m directory_permission = "0777"
+      [32m+[0m[0m file_permission      = "0777"
+      [32m+[0m[0m filename             = "certs/client.crt"
+      [32m+[0m[0m id                   = (known after apply)
+    }
+
+[1m  # module.eks.local_file.server_crt[0m will be created
+[0m  [32m+[0m[0m resource "local_file" "server_crt" {
+      [32m+[0m[0m content              = (known after apply)
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
+      [32m+[0m[0m directory_permission = "0777"
+      [32m+[0m[0m file_permission      = "0777"
+      [32m+[0m[0m filename             = "certs/server.crt"
+      [32m+[0m[0m id                   = (known after apply)
+    }
+
+[1m  # module.eks.local_sensitive_file.ca_key[0m will be created
+[0m  [32m+[0m[0m resource "local_sensitive_file" "ca_key" {
+      [32m+[0m[0m content              = (sensitive value)
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
+      [32m+[0m[0m directory_permission = "0700"
+      [32m+[0m[0m file_permission      = "0600"
+      [32m+[0m[0m filename             = "certs/ca.key"
+      [32m+[0m[0m id                   = (known after apply)
+    }
+
+[1m  # module.eks.local_sensitive_file.client_key[0m will be created
+[0m  [32m+[0m[0m resource "local_sensitive_file" "client_key" {
+      [32m+[0m[0m content              = (sensitive value)
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
+      [32m+[0m[0m directory_permission = "0700"
+      [32m+[0m[0m file_permission      = "0600"
+      [32m+[0m[0m filename             = "certs/client.key"
+      [32m+[0m[0m id                   = (known after apply)
+    }
+
+[1m  # module.eks.local_sensitive_file.server_key[0m will be created
+[0m  [32m+[0m[0m resource "local_sensitive_file" "server_key" {
+      [32m+[0m[0m content              = (sensitive value)
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
+      [32m+[0m[0m directory_permission = "0700"
+      [32m+[0m[0m file_permission      = "0600"
+      [32m+[0m[0m filename             = "certs/server.key"
+      [32m+[0m[0m id                   = (known after apply)
+    }
+
+[1m  # module.eks.random_integer.suffix[0m will be created
+[0m  [32m+[0m[0m resource "random_integer" "suffix" {
+      [32m+[0m[0m id     = (known after apply)
+      [32m+[0m[0m max    = 7777
+      [32m+[0m[0m min    = 777
+      [32m+[0m[0m result = (known after apply)
+    }
+
+[1m  # module.eks.tls_cert_request.csr_client[0m will be created
+[0m  [32m+[0m[0m resource "tls_cert_request" "csr_client" {
+      [32m+[0m[0m cert_request_pem   = (known after apply)
+      [32m+[0m[0m id                 = (known after apply)
+      [32m+[0m[0m key_algorithm      = (known after apply)
+      [32m+[0m[0m private_key_pem    = (sensitive value)
+      [32m+[0m[0m private_key_pem_wo = (write-only attribute)
+
+      [32m+[0m[0m subject {
+          [32m+[0m[0m common_name  = "client.eks-series.internal"
+          [32m+[0m[0m organization = "EKS-Series"
+        }
+    }
+
+[1m  # module.eks.tls_cert_request.csr_server[0m will be created
+[0m  [32m+[0m[0m resource "tls_cert_request" "csr_server" {
+      [32m+[0m[0m cert_request_pem   = (known after apply)
+      [32m+[0m[0m dns_names          = [
+          [32m+[0m[0m "server.eks-series.internal",
+          [32m+[0m[0m "vpn.eks-series.internal",
+        ]
+      [32m+[0m[0m id                 = (known after apply)
+      [32m+[0m[0m key_algorithm      = (known after apply)
+      [32m+[0m[0m private_key_pem    = (sensitive value)
+      [32m+[0m[0m private_key_pem_wo = (write-only attribute)
+
+      [32m+[0m[0m subject {
+          [32m+[0m[0m common_name  = "server.eks-series.internal"
+          [32m+[0m[0m organization = "EKS-Series"
+        }
+    }
+
+[1m  # module.eks.tls_locally_signed_cert.client_crt[0m will be created
+[0m  [32m+[0m[0m resource "tls_locally_signed_cert" "client_crt" {
+      [32m+[0m[0m allowed_uses          = [
+          [32m+[0m[0m "digital_signature",
+          [32m+[0m[0m "key_encipherment",
+          [32m+[0m[0m "client_auth",
+        ]
+      [32m+[0m[0m ca_cert_pem           = (known after apply)
+      [32m+[0m[0m ca_key_algorithm      = (known after apply)
+      [32m+[0m[0m ca_private_key_pem    = (sensitive value)
+      [32m+[0m[0m ca_private_key_pem_wo = (write-only attribute)
+      [32m+[0m[0m cert_pem              = (known after apply)
+      [32m+[0m[0m cert_request_pem      = (known after apply)
+      [32m+[0m[0m early_renewal_hours   = 0
+      [32m+[0m[0m id                    = (known after apply)
+      [32m+[0m[0m is_ca_certificate     = false
+      [32m+[0m[0m max_path_length       = (known after apply)
+      [32m+[0m[0m ready_for_renewal     = false
+      [32m+[0m[0m set_subject_key_id    = true
+      [32m+[0m[0m validity_end_time     = (known after apply)
+      [32m+[0m[0m validity_period_hours = 8600
+      [32m+[0m[0m validity_start_time   = (known after apply)
+    }
+
+[1m  # module.eks.tls_locally_signed_cert.server_crt[0m will be created
+[0m  [32m+[0m[0m resource "tls_locally_signed_cert" "server_crt" {
+      [32m+[0m[0m allowed_uses          = [
+          [32m+[0m[0m "digital_signature",
+          [32m+[0m[0m "key_encipherment",
+          [32m+[0m[0m "server_auth",
+        ]
+      [32m+[0m[0m ca_cert_pem           = (known after apply)
+      [32m+[0m[0m ca_key_algorithm      = (known after apply)
+      [32m+[0m[0m ca_private_key_pem    = (sensitive value)
+      [32m+[0m[0m ca_private_key_pem_wo = (write-only attribute)
+      [32m+[0m[0m cert_pem              = (known after apply)
+      [32m+[0m[0m cert_request_pem      = (known after apply)
+      [32m+[0m[0m early_renewal_hours   = 0
+      [32m+[0m[0m id                    = (known after apply)
+      [32m+[0m[0m is_ca_certificate     = false
+      [32m+[0m[0m max_path_length       = (known after apply)
+      [32m+[0m[0m ready_for_renewal     = false
+      [32m+[0m[0m set_subject_key_id    = true
+      [32m+[0m[0m validity_end_time     = (known after apply)
+      [32m+[0m[0m validity_period_hours = 8600
+      [32m+[0m[0m validity_start_time   = (known after apply)
+    }
+
+[1m  # module.eks.tls_private_key.ca_key[0m will be created
+[0m  [32m+[0m[0m resource "tls_private_key" "ca_key" {
+      [32m+[0m[0m algorithm                     = "RSA"
+      [32m+[0m[0m ecdsa_curve                   = "P224"
+      [32m+[0m[0m id                            = (known after apply)
+      [32m+[0m[0m private_key_openssh           = (sensitive value)
+      [32m+[0m[0m private_key_pem               = (sensitive value)
+      [32m+[0m[0m private_key_pem_pkcs8         = (sensitive value)
+      [32m+[0m[0m public_key_fingerprint_md5    = (known after apply)
+      [32m+[0m[0m public_key_fingerprint_sha256 = (known after apply)
+      [32m+[0m[0m public_key_openssh            = (known after apply)
+      [32m+[0m[0m public_key_pem                = (known after apply)
+      [32m+[0m[0m rsa_bits                      = 4096
+    }
+
+[1m  # module.eks.tls_private_key.client_key[0m will be created
+[0m  [32m+[0m[0m resource "tls_private_key" "client_key" {
+      [32m+[0m[0m algorithm                     = "RSA"
+      [32m+[0m[0m ecdsa_curve                   = "P224"
+      [32m+[0m[0m id                            = (known after apply)
+      [32m+[0m[0m private_key_openssh           = (sensitive value)
+      [32m+[0m[0m private_key_pem               = (sensitive value)
+      [32m+[0m[0m private_key_pem_pkcs8         = (sensitive value)
+      [32m+[0m[0m public_key_fingerprint_md5    = (known after apply)
+      [32m+[0m[0m public_key_fingerprint_sha256 = (known after apply)
+      [32m+[0m[0m public_key_openssh            = (known after apply)
+      [32m+[0m[0m public_key_pem                = (known after apply)
+      [32m+[0m[0m rsa_bits                      = 4096
+    }
+
+[1m  # module.eks.tls_private_key.server_key[0m will be created
+[0m  [32m+[0m[0m resource "tls_private_key" "server_key" {
+      [32m+[0m[0m algorithm                     = "RSA"
+      [32m+[0m[0m ecdsa_curve                   = "P224"
+      [32m+[0m[0m id                            = (known after apply)
+      [32m+[0m[0m private_key_openssh           = (sensitive value)
+      [32m+[0m[0m private_key_pem               = (sensitive value)
+      [32m+[0m[0m private_key_pem_pkcs8         = (sensitive value)
+      [32m+[0m[0m public_key_fingerprint_md5    = (known after apply)
+      [32m+[0m[0m public_key_fingerprint_sha256 = (known after apply)
+      [32m+[0m[0m public_key_openssh            = (known after apply)
+      [32m+[0m[0m public_key_pem                = (known after apply)
+      [32m+[0m[0m rsa_bits                      = 4096
+    }
+
+[1m  # module.eks.tls_self_signed_cert.ca_crt[0m will be created
+[0m  [32m+[0m[0m resource "tls_self_signed_cert" "ca_crt" {
+      [32m+[0m[0m allowed_uses          = [
+          [32m+[0m[0m "cert_signing",
+          [32m+[0m[0m "crl_signing",
+          [32m+[0m[0m "digital_signature",
+          [32m+[0m[0m "key_encipherment",
+        ]
+      [32m+[0m[0m cert_pem              = (known after apply)
+      [32m+[0m[0m early_renewal_hours   = 0
+      [32m+[0m[0m id                    = (known after apply)
+      [32m+[0m[0m is_ca_certificate     = true
+      [32m+[0m[0m key_algorithm         = (known after apply)
+      [32m+[0m[0m max_path_length       = (known after apply)
+      [32m+[0m[0m private_key_pem       = (sensitive value)
+      [32m+[0m[0m private_key_pem_wo    = (write-only attribute)
+      [32m+[0m[0m ready_for_renewal     = false
+      [32m+[0m[0m set_authority_key_id  = false
+      [32m+[0m[0m set_subject_key_id    = false
+      [32m+[0m[0m validity_end_time     = (known after apply)
+      [32m+[0m[0m validity_period_hours = 8600
+      [32m+[0m[0m validity_start_time   = (known after apply)
+
+      [32m+[0m[0m subject {
+          [32m+[0m[0m common_name  = "VPN Root CA"
+          [32m+[0m[0m organization = "EKS-Series"
+        }
+    }
+
+[1mPlan:[0m [0m73 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  [32m+[0m[0m client_cert = (sensitive value)
+  [32m+[0m[0m client_key  = (sensitive value)
+[90m
+─────────────────────────────────────────────────────────────────────────────[0m
+
+Note: You didn't use the -out option to save this plan, so Terraform can't
+guarantee to take exactly these actions if you run "terraform apply" now.

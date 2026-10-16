@@ -5,7 +5,7 @@ locals {
 
 
 module "eks" {
-  source = "../modules"
+  source = "../Modules"
 
   env                      = var.env
   cluster_name             = "${local.env}-${local.org}-${var.cluster_name}"
@@ -14,10 +14,10 @@ module "eks" {
   igw_name                 = "${local.env}-${local.org}-${var.igw_name}"
   public_subnet_count      = var.public_subnet_count
   public_subnet_cidrs      = var.public_subnet_cidrs
-  public_subnet_name       = "${local.env}-${local.org}-${var.public_subnet_name}"
+  public_subnet_name       = [for i in var.public_subnet_name : "${local.env}-${local.org}-${i}"]
   private_subnet_count     = var.private_subnet_count
   private_subnet_cidrs     = var.private_subnet_cidrs
-  private_subnet_name      = "${local.env}-${local.org}-${var.private_subnet_name}"
+  private_subnet_name      = [for i in var.private_subnet_name : "${local.env}-${local.org}-${i}"]
   availability_zones       = var.availability_zones
   public_route_table_name  = "${local.env}-${local.org}-${var.public_route_table_name}"
   private_route_table_name = "${local.env}-${local.org}-${var.private_route_table_name}"
@@ -33,8 +33,8 @@ module "eks" {
   node_group_max_size       = var.node_group_max_size
   node_group_min_size       = var.node_group_min_size
 
-  vpn_domain                = "${var.vpn_domain}"
-  client_cidr_block         = "${var.client_cidr_block}"
+  vpn_domain        = var.vpn_domain
+  client_cidr_block = var.client_cidr_block
 
 }
 

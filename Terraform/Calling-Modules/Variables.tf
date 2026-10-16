@@ -1,6 +1,6 @@
 ####################aws_region############
 variable "aws_region" {
-  type = string
+  type    = string
   default = "us-east-1"
 }
 
@@ -24,7 +24,7 @@ variable "vpc_name" {
 
 ####################env############
 variable "env" {
-  type = string
+  type    = string
   default = "Dev"
 }
 
@@ -132,31 +132,31 @@ variable "endpoint_public_access" {
 
 ####################node_group_instance_types############
 variable "node_group_instance_types" {
-  type = list(string)
-  default = [ "t3.medium" ]
+  type    = list(string)
+  default = ["t3.medium"]
 }
 
 ####################node_group_capacity_type############
 variable "node_group_capacity_type" {
-  type = string
+  type    = string
   default = "ON_DEMAND"
 }
 
 ####################node_group_desired_size############
 variable "node_group_desired_size" {
-  type = number
+  type    = number
   default = 1
 }
 
 ####################node_group_max_size############
 variable "node_group_max_size" {
-  type = number
+  type    = number
   default = 10
 }
 
 ####################node_group_min_size############
 variable "node_group_min_size" {
-  type = number
+  type    = number
   default = 1
 }
 
@@ -168,6 +168,6 @@ variable "vpn_domain" {
 
 ####################client_cidr_block############
 variable "client_cidr_block" {
-  type = string
+  type    = string
   default = "10.100.0.0/22"
 }

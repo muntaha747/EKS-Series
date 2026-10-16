@@ -1,7 +1,7 @@
 ####################################################CA.Key & CA.CRT###########################################################
 resource "tls_private_key" "ca_key" {
   algorithm = "RSA"
-  rsa_bits  = 4096
+  rsa_bits  = 2048
 }
 
 resource "tls_self_signed_cert" "ca_crt" {
@@ -27,7 +27,7 @@ resource "tls_self_signed_cert" "ca_crt" {
 
 resource "tls_private_key" "server_key" {
   algorithm = "RSA"
-  rsa_bits  = 4096
+  rsa_bits  = 2048
 }
 
 resource "tls_cert_request" "csr_server" {
@@ -64,7 +64,7 @@ resource "tls_locally_signed_cert" "server_crt" {
 
 resource "tls_private_key" "client_key" {
   algorithm = "RSA"
-  rsa_bits  = 4096
+  rsa_bits  = 2048
 }
 
 resource "tls_cert_request" "csr_client" {
