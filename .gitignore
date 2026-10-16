@@ -45,3 +45,7 @@ terraform.rc
 
 
 .terraform.lock.hcl
+.terraform/
+*.tfstate
+*.tfstate.*
+certs/
