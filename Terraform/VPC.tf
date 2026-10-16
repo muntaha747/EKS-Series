@@ -43,7 +43,7 @@ resource "aws_subnet" "Private_Subnets" {
   availability_zone       = element(var.availability_zones, count.index)
   map_public_ip_on_launch = false
   tags = {
-    Name                                        = element(var.public_subnet_name, count.index)
+    Name                                        = element(var.private_subnet_name, count.index)
     Env                                         = var.env
     "kubernetes.io/cluster/${var.cluster_name}" = "owned"
     "kubernetes.io/role/internal-elb"           = 1

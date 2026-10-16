@@ -37,9 +37,8 @@ variable "public_subnet_count" {
 
 variable "public_subnet_cidrs" {
   type    = list(string)
-  default = ["10.0.0.0/24", "10.0.0.1/24", "10.0.0.2/24", "10.0.0.3/24", "10.0.0.4/24", "10.0.0.5/24"]
+  default = ["10.0.0.0/24", "10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24", "10.0.4.0/24", "10.0.5.0/24"]
 }
-
 
 variable "public_subnet_name" {
   type    = list(string)
@@ -56,9 +55,10 @@ variable "private_subnet_name" {
   default = ["EKS-Private-Subnet-1", "EKS-Private-Subnet-2", "EKS-Private-Subnet-3", "EKS-Private-Subnet-4", "EKS-Private-Subnet-5", "EKS-Private-Subnet-6", ]
 }
 
+
 variable "private_subnet_cidrs" {
   type    = list(string)
-  default = ["10.0.0.6/24", "10.0.0.7/24", "10.0.0.8/24", "10.0.0.9/24", "10.0.0.11/24", "10.0.0.12/24"]
+  default = ["10.0.6.0/24", "10.0.7.0/24", "10.0.8.0/24", "10.0.9.0/24", "10.0.10.0/24", "10.0.11.0/24"]
 }
 
 variable "availability_zones" {
