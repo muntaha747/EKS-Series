@@ -1,0 +1,42 @@
+name: 'Destroy EKS Infrastructure'
+
+on:
+  workflow_dispatch: # This creates a manual "Run workflow" button in GitHub
+
+permissions:
+  id-token: write # Required for OIDC
+  contents: read
+
+jobs:
+  destroy:
+    name: 'Terraform Destroy'
+    runs-on: ubuntu-latest
+    
+    # I highly recommend using the environment here. 
+    # If you have "Required reviewers" set on 'Prod', it will pause and ask for your approval before destroying.
+    environment: Prod 
+    
+    defaults:
+      run:
+        working-directory: ./Terraform/Calling-Modules # Ensure this matches your folder structure
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: us-east-1
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.16.6
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Destroy
+        run: terraform destroy -auto-approve -var-file="test.tfvars"

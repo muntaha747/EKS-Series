@@ -26,7 +26,7 @@ resource "aws_ec2_client_vpn_endpoint" "VPN_Client" {
 ########################################################AWS Client VPN Association with the subnet##################################
 
 resource "aws_ec2_client_vpn_network_association" "vpn-subnet-association" {
-  count = var.private_subnet_count
+  count = 2
   client_vpn_endpoint_id = aws_ec2_client_vpn_endpoint.VPN_Client.id
   subnet_id              = aws_subnet.Private_Subnets[count.index].id
 }
