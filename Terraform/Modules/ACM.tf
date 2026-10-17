@@ -31,4 +31,3 @@ resource "aws_acm_certificate" "client_cert" {
   }
 }
 
-# This is the certificate which will be stored in AWS ACM.

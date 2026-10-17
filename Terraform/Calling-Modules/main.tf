@@ -4,6 +4,7 @@ locals {
 }
 
 
+
 module "eks" {
   source = "../Modules"
 
@@ -24,9 +25,11 @@ module "eks" {
   eip_name                 = "${local.env}-${local.org}-${var.eip_name}"
   nat_gateway_name         = "${local.env}-${local.org}-${var.nat_gateway_name}"
 
-  cluster_version           = var.cluster_version
-  endpoint_private_access   = var.endpoint_private_access
-  endpoint_public_access    = var.endpoint_public_access
+  cluster_version         = var.cluster_version
+  endpoint_private_access = var.endpoint_private_access
+  endpoint_public_access  = var.endpoint_public_access
+
+
   node_group_instance_types = var.node_group_instance_types
   node_group_capacity_type  = var.node_group_capacity_type
   node_group_desired_size   = var.node_group_desired_size
@@ -35,16 +38,4 @@ module "eks" {
 
   vpn_domain        = var.vpn_domain
   client_cidr_block = var.client_cidr_block
-
-}
-
-
-output "client_key" {
-  value     = module.eks.client_key
-  sensitive = true
-}
-
-output "client_cert" {
-  value     = module.eks.client_cert
-  sensitive = true
 }

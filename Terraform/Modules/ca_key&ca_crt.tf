@@ -125,4 +125,3 @@ resource "local_sensitive_file" "client_key" {
   content         = tls_private_key.client_key.private_key_pem
   file_permission = "0600"
 }
-

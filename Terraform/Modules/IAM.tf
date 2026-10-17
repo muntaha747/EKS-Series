@@ -75,6 +75,7 @@ resource "aws_security_group" "EKS-API-Access-SG" {
     Name = "EKS-API-Access-SG"
     Env  = var.env
   }
+  
   ingress {
     from_port   = 443
     to_port     = 443

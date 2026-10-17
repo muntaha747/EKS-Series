@@ -23,8 +23,7 @@ resource "aws_ec2_client_vpn_endpoint" "VPN_Client" {
   }
 }
 
-
-########################################################AWS CLient VPN Association with the subnet##################################
+########################################################AWS Client VPN Association with the subnet##################################
 
 resource "aws_ec2_client_vpn_network_association" "vpn-subnet-association" {
   count = var.private_subnet_count
@@ -32,12 +31,11 @@ resource "aws_ec2_client_vpn_network_association" "vpn-subnet-association" {
   subnet_id              = aws_subnet.Private_Subnets[count.index].id
 }
 
-########################################################AWS CLient VPN Authorization rule##################################
+########################################################AWS Client VPN Authorization rule##################################
 
 resource "aws_ec2_client_vpn_authorization_rule" "vpn_auth_rule" {
-  count = var.private_subnet_count
   client_vpn_endpoint_id = aws_ec2_client_vpn_endpoint.VPN_Client.id
-  target_network_cidr    = var.private_subnet_cidrs[count.index]
+  target_network_cidr    = var.vpc_cidr  # <--- CHANGED: Allows the whole VPC (10.0.0.0/16)
   authorize_all_groups   = true
 }
 
@@ -48,16 +46,17 @@ resource "aws_cloudwatch_log_group" "vpn_logs" {
     name              = "/aws/vpn/${var.vpn_domain}"
     retention_in_days = 2192 # 6 years
 }
+
 resource "aws_cloudwatch_log_stream" "vpn_logs" {
   name           = "vpn-connection-logs"
   log_group_name = aws_cloudwatch_log_group.vpn_logs.name
 }
 
-
 output "client_key" {
   value     = tls_private_key.client_key.private_key_pem
   sensitive = true
 }
+
 output "client_cert" {
   value = tls_locally_signed_cert.client_crt.cert_pem
 }
