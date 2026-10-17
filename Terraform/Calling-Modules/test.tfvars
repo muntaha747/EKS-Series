@@ -36,7 +36,7 @@ private_subnet_name = ["EKS-Private-Subnet-1", "EKS-Private-Subnet-2", "EKS-Priv
 private_subnet_cidrs = ["10.0.6.0/24", "10.0.7.0/24", "10.0.8.0/24", "10.0.9.0/24", "10.0.10.0/24", "10.0.11.0/24"]
 
 ####################availability_zones############
-availability_zones = ["us-east-1a", "us-east-1b", "us-east-1c", "us-east-1d", "us-east-1e", "us-east-1f"]
+availability_zones = ["us-east-1a", "us-east-1b", "us-east-1c", "us-east-1d", "us-east-1f"] #Control plane does not supports us-east-1e
 
 ####################public_route_table_cidr############
 public_route_table_cidr = "0.0.0.0/0"
