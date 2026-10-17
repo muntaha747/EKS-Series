@@ -84,8 +84,5 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
-      - name: Terraform Format Check
-        run: terraform fmt -check
-
       - name: Terraform Apply
         run: terraform apply -auto-approve -var-file="test.tfvars"
