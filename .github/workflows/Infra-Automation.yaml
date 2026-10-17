@@ -74,6 +74,7 @@ jobs:
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: us-east-1
+          audience: sts.amazonaws.com
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
@@ -82,6 +83,12 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
+
+      - name: Terraform Format Check
+        run: terraform fmt -check
+
+      - name: Terraform Plan
+        run: terraform plan -no-color -var-file="test.tfvars"
 
       - name: Terraform Apply
         run: terraform apply -auto-approve -var-file="test.tfvars"
