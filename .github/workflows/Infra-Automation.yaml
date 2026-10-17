@@ -1,0 +1,87 @@
+name: 'Terraform EKS Infrastructure'
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch: 
+
+permissions:
+  id-token: write # Required for OIDC
+  contents: read
+
+jobs:
+  # ==========================================
+  # JOB 1: PLAN (Only runs on Pull Requests)
+  # ==========================================
+  plan:
+    name: 'Terraform Plan'
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    
+    defaults:
+      run:
+        working-directory: ./Terraform/Calling-Modules # Ensure this path is correct
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: us-east-1
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.16.6
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Format Check
+        run: terraform fmt -check
+
+      - name: Terraform Plan
+        run: terraform plan -no-color -var-file="test.tfvars"
+
+  # ==========================================
+  # JOB 2: APPLY (Only runs on Push to Main)
+  # ==========================================
+  apply:
+    name: 'Terraform Apply'
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    # This triggers the manual approval pause you asked for
+    environment: Prod
+    
+    defaults:
+      run:
+        working-directory: ./Terraform/Calling-Modules # Ensure this path is correct
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: us-east-1
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.16.6
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve -var-file="test.tfvars"

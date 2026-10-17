@@ -29,7 +29,6 @@ module "eks" {
   endpoint_private_access = var.endpoint_private_access
   endpoint_public_access  = var.endpoint_public_access
 
-
   node_group_instance_types = var.node_group_instance_types
   node_group_capacity_type  = var.node_group_capacity_type
   node_group_desired_size   = var.node_group_desired_size
