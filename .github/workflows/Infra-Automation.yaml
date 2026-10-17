@@ -86,3 +86,5 @@ jobs:
 
       - name: Terraform Apply
         run: terraform apply -auto-approve -lock-timeout=300s -var-file="test.tfvars"
+
+        # This is the CICD Process
