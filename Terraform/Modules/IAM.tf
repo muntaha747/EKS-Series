@@ -66,40 +66,7 @@ resource "aws_iam_role_policy_attachment" "AmazonEKS_CNI_Policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
 }
 
-###############################################EKS-Security-Group###############################################
-resource "aws_security_group" "EKS-API-Access-SG" {
-  name        = "Security group to access Kube-Api-Server"
-  description = "Inbound traffic for the worker node only https"
-  vpc_id      = aws_vpc.EKS_VPC.id
-  tags = {
-    Name = "EKS-API-Access-SG"
-    Env  = var.env
-  }
-  
-  ingress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["${var.client_cidr_block}"]
-  }
 
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
-
-resource "aws_security_group_rule" "eks_api_from_vpn" {
-  type                     = "ingress"
-  from_port                = 443
-  to_port                  = 443
-  protocol                 = "tcp"
-  security_group_id        = aws_security_group.EKS-API-Access-SG.id
-  source_security_group_id = aws_security_group.vpn_security_group.id
-  description              = "Allow VPN clients to access EKS API Server"
-}
 
 ##################################Creating an New IAM User#############################################
 resource "aws_iam_user" "muntaha_iam_user" {

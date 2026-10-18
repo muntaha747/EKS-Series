@@ -2,9 +2,6 @@ locals {
   env = var.env
   org = "YT"
 }
-
-
-
 module "eks" {
   source = "../Modules"
 
@@ -45,3 +42,5 @@ output "client_key" {
 output "client_cert" {
   value = module.eks.client_cert
 }
+
+#This is the module calling.
