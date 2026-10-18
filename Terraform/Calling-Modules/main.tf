@@ -42,7 +42,7 @@ module "eks" {
 
 output "client_key" {
   value     = module.eks.client_key
-  sensitive = false
+  sensitive = true
 }
 
 output "client_cert" {
