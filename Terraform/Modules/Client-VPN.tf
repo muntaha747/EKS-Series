@@ -13,7 +13,7 @@ resource "aws_security_group" "vpn_security_group" {
 }
 
 
-
+########################################################AWS Client VPN Association with the subnet##################################
 
 resource "aws_ec2_client_vpn_endpoint" "VPN_Client" {
   description            = "terraform-clientvpn-example"

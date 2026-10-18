@@ -111,13 +111,13 @@ resource "aws_iam_access_key" "muntaha_iam_user_access_keys" {
   user = aws_iam_user.muntaha_iam_user.name
 }
 resource "aws_iam_access_key" "muntaha_iam_user_secret_keys" {
-  user = aws_iam_user.muntaha_user.name 
+  user = aws_iam_user.muntaha_iam_user.name 
 }
 output "muntaha_iam_user_access_keys" {
   value = aws_iam_access_key.muntaha_iam_user_access_keys.id
 }
 
 output "muntaha_iam_user_secret_keys" {
-  value = muntaha_iam_user_secret_keys.secret
+  value = aws_iam_access_key.muntaha_iam_user_secret_keys.secret
   sensitive = true
 }
