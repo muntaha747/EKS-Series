@@ -33,7 +33,7 @@ resource "aws_eks_access_entry" "root_admin_entry" {
   type          = "STANDARD"
 }
 
-# 2. Attach the Cluster Admin Policy to the Entry
+# 2. Attach the Cluster Admin Policy to the Access Entry
 resource "aws_eks_access_policy_association" "root_admin_policy" {
   cluster_name  = aws_eks_cluster.EKS-Control-Plane.name
   principal_arn = aws_eks_access_entry.root_admin_entry.principal_arn
@@ -43,17 +43,17 @@ resource "aws_eks_access_policy_association" "root_admin_policy" {
   }
 }
 
-resource "aws_eks_access_entry" "muntaha-devops-engineer-entry" {
+resource "aws_eks_access_entry" "Hassan-devops-engineer-entry" {
   cluster_name = aws_eks_cluster.EKS-Control-Plane.name
-  principal_arn = aws_iam_role.muntaha-eks-iam-role.arn
+  principal_arn = aws_iam_role.Hassan-eks-iam-role.arn
   type              = "STANDARD"
   region = "us-east-1"
 }
 
-resource "aws_eks_access_policy_association" "muntaha-devops-engineer-entry-association" {
+resource "aws_eks_access_policy_association" "Hassan-devops-engineer-entry-association" {
   cluster_name  = aws_eks_cluster.EKS-Control-Plane.name
   policy_arn    = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSViewPolicy"
-  principal_arn = aws_iam_role.muntaha-eks-iam-role.arn
+  principal_arn = aws_iam_role.Hassan-eks-iam-role.arn
   access_scope {
     type       = "cluster"
   }

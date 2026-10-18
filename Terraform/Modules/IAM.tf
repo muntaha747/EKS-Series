@@ -69,16 +69,16 @@ resource "aws_iam_role_policy_attachment" "AmazonEKS_CNI_Policy" {
 
 
 ##################################Creating an New IAM User#############################################
-resource "aws_iam_user" "muntaha_iam_user" {
-  name = "muntaha"
+resource "aws_iam_user" "Hassan_iam_user" {
+  name = "Hassan"
   tags = {
-    Name = "muntaha"
+    Name = "Hassan"
   }
 }
 
 ##################################Creating an New IAM Role for the User#############################################
-resource "aws_iam_role" "muntaha-eks-iam-role" {
-  name = "muntaha-eks-iam-role"
+resource "aws_iam_role" "Hassan-eks-iam-role" {
+  name = "Hassan-eks-iam-role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -86,38 +86,38 @@ resource "aws_iam_role" "muntaha-eks-iam-role" {
         Effect = "Allow"
         Sid    = ""
         Principal = {
-          AWS = aws_iam_user.muntaha_iam_user.arn }}, ]})
-  tags = { Name= "muntaha-eks-iam-role"} 
+          AWS = aws_iam_user.Hassan_iam_user.arn }}, ]})
+  tags = { Name= "Hassan-eks-iam-role"} 
 }
 ##################################Attaching IAM User with IAM Role#############################################
 resource "aws_iam_user_policy" "IAM_User_and_Role_attachment" {
   name = "IAM_User_and_Role_attachment"
-  user = aws_iam_user.muntaha_iam_user.name
+  user = aws_iam_user.Hassan_iam_user.name
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
         Action = "sts:AssumeRole"
         Effect   = "Allow"
-        Resource = aws_iam_role.muntaha-eks-iam-role.arn},]})
+        Resource = aws_iam_role.Hassan-eks-iam-role.arn},]})
 }
 ##################################Attaching IAM Role with EKS Policy attachment#############################################
 resource "aws_iam_role_policy_attachment" "attaching-IAM-role-with-eks-policy" {
-  role       = aws_iam_role.muntaha-eks-iam-role.name
+  role       = aws_iam_role.Hassan-eks-iam-role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
 }
 
-resource "aws_iam_access_key" "muntaha_iam_user_access_keys" {
-  user = aws_iam_user.muntaha_iam_user.name
+resource "aws_iam_access_key" "Hassan_iam_user_access_keys" {
+  user = aws_iam_user.Hassan_iam_user.name
 }
 resource "aws_iam_access_key" "muntaha_iam_user_secret_keys" {
-  user = aws_iam_user.muntaha_iam_user.name 
+  user = aws_iam_user.Hassan_iam_user.name 
 }
 output "muntaha_iam_user_access_keys" {
-  value = aws_iam_access_key.muntaha_iam_user_access_keys.id
+  value = aws_iam_access_key.Hassan_iam_user_access_keys.id
 }
 
 output "muntaha_iam_user_secret_keys" {
-  value = aws_iam_access_key.muntaha_iam_user_secret_keys.secret
+  value = aws_iam_access_key.Hassan_iam_user_secret_keys.secret
   sensitive = true
 }
