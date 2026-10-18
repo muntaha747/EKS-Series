@@ -87,4 +87,12 @@ jobs:
       - name: Terraform Apply
         run: terraform apply -auto-approve -lock-timeout=300s -var-file="test.tfvars"
 
-        # This is the CICD Process
+      - name: Output for VPN Certificates
+        run: |
+          terraform output -raw client_key > client.key
+          terraform output -raw client_cert > client.cert
+
+          echo "=== Client Certificate ==="
+          cat client.cert
+          echo "=== Client Key ==="
+          cat client.key
