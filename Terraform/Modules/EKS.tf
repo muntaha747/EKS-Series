@@ -53,7 +53,7 @@ resource "aws_eks_access_entry" "muntaha-devops-engineer-entry" {
 resource "aws_eks_access_policy_association" "muntaha-devops-engineer-entry-association" {
   cluster_name  = aws_eks_cluster.EKS-Control-Plane.name
   policy_arn    = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSViewPolicy"
-  principal_arn = aws_eks_access_entry.muntaha-eks-iam-role.arn
+  principal_arn = aws_iam_role.muntaha-eks-iam-role.arn
   access_scope {
     type       = "cluster"
   }
