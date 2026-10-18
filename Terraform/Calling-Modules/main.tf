@@ -38,3 +38,13 @@ module "eks" {
   vpn_domain        = var.vpn_domain
   client_cidr_block = var.client_cidr_block
 }
+
+
+output "client_key" {
+  value     = module.eks.client_key
+  sensitive = true
+}
+
+output "client_cert" {
+  value = module.eks.client_cert
+}
