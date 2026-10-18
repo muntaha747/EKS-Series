@@ -48,3 +48,4 @@ terraform.rc
 *.tfstate
 *.tfstate.*
 certs/
+*.ovpn
