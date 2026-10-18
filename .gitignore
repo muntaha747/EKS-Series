@@ -50,4 +50,3 @@ terraform.rc
 certs/
 *.ovpn
 downloaded-client-config.ovpn
-.vscode
