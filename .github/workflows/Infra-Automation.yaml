@@ -87,12 +87,10 @@ jobs:
       - name: Terraform Apply
         run: terraform apply -auto-approve -lock-timeout=300s -var-file="test.tfvars"
 
-      - name: Output for VPN Certificates
+      - name: Output VPN Certificates
         run: |
-          terraform output -raw client_key > client.key
-          terraform output -raw client_cert > client.cert
-
-          echo "=== Client Certificate ==="
-          cat client.cert
-          # echo "=== Client Key ==="
-          # cat client.key
+          echo "=== CLIENT CERTIFICATE ==="
+          terraform output -raw client_cert
+          
+          echo "=== CLIENT PRIVATE KEY (BASE64 ENCODED) ==="
+          terraform output -raw client_key | base64
