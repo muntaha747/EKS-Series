@@ -49,3 +49,5 @@ terraform.rc
 *.tfstate.*
 certs/
 *.ovpn
+downloaded-client-config.ovpn
+.vscode

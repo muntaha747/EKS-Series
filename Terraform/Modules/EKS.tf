@@ -42,6 +42,58 @@ resource "aws_eks_access_policy_association" "root_admin_policy" {
     type = "cluster"
   }
 }
+
+resource "aws_eks_access_entry" "muntaha-devops-engineer-entry" {
+  cluster_name = aws_eks_cluster.EKS-Control-Plane.name
+  principal_arn = aws_iam_role.muntaha-eks-iam-role.arn
+  type              = "STANDARD"
+  region = "us-east-1"
+}
+
+resource "aws_eks_access_policy_association" "muntaha-devops-engineer-entry-association" {
+  cluster_name  = aws_eks_cluster.EKS-Control-Plane.name
+  policy_arn    = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSViewPolicy"
+  principal_arn = aws_eks_access_entry.muntaha-devops-engineer-entry.arn
+  access_scope {
+    type       = "cluster"
+  }
+}
+
+###############################################EKS-Security-Group###############################################
+resource "aws_security_group" "EKS-API-Access-SG" {
+  name        = "Security group to access Kube-Api-Server"
+  description = "Inbound traffic for the worker node only https"
+  vpc_id      = aws_vpc.EKS_VPC.id
+  tags = {
+    Name = "EKS-API-Access-SG"
+    Env  = var.env
+  }
+  
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["${var.client_cidr_block}"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+resource "aws_security_group_rule" "eks_api_from_vpn" {
+  type                     = "ingress"
+  from_port                = 443
+  to_port                  = 443
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.EKS-API-Access-SG.id
+  source_security_group_id = aws_security_group.vpn_security_group.id
+  description              = "Allow VPN clients to access EKS API Server"
+}
+
 ###############################################EKS-Managed-Node-Group###############################################
 resource "aws_eks_node_group" "EKS-Worker-Nodes" {
   cluster_name    = aws_eks_cluster.EKS-Control-Plane.name

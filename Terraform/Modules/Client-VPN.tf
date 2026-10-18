@@ -1,3 +1,20 @@
+resource "aws_security_group" "vpn_security_group" {
+  name        = "vpn-endpoint-sg"
+  description = "Allow VPN traffic to VPC"
+  vpc_id      = aws_vpc.EKS_VPC.id
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  tags = { Env = var.env }
+}
+
+
+
+
 resource "aws_ec2_client_vpn_endpoint" "VPN_Client" {
   description            = "terraform-clientvpn-example"
   server_certificate_arn = aws_acm_certificate.server_cert.arn

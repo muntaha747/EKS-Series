@@ -24,17 +24,14 @@ module "eks" {
   private_route_table_name = "${local.env}-${local.org}-${var.private_route_table_name}"
   eip_name                 = "${local.env}-${local.org}-${var.eip_name}"
   nat_gateway_name         = "${local.env}-${local.org}-${var.nat_gateway_name}"
-
   cluster_version         = var.cluster_version
   endpoint_private_access = var.endpoint_private_access
   endpoint_public_access  = var.endpoint_public_access
-
   node_group_instance_types = var.node_group_instance_types
   node_group_capacity_type  = var.node_group_capacity_type
   node_group_desired_size   = var.node_group_desired_size
   node_group_max_size       = var.node_group_max_size
   node_group_min_size       = var.node_group_min_size
-
   vpn_domain        = var.vpn_domain
   client_cidr_block = var.client_cidr_block
 }

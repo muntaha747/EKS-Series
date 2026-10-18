@@ -23,7 +23,6 @@ resource "aws_iam_role" "EKS-Performance-Cluster-Role" {
     Name = "${var.cluster_name}-Role-${random_integer.suffix.result}"
   }
 }
-
 ###############################################EKS-CLUSTER-ROLE-POLICY-ATTACHMENT###############################################
 resource "aws_iam_role_policy_attachment" "EKS_CLUSTER_POLICY_ATTACHMENT" {
   role       = aws_iam_role.EKS-Performance-Cluster-Role.name
@@ -67,6 +66,7 @@ resource "aws_iam_role_policy_attachment" "AmazonEKS_CNI_Policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
 }
 
+###############################################EKS-Security-Group###############################################
 resource "aws_security_group" "EKS-API-Access-SG" {
   name        = "Security group to access Kube-Api-Server"
   description = "Inbound traffic for the worker node only https"
@@ -89,4 +89,66 @@ resource "aws_security_group" "EKS-API-Access-SG" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+}
+
+resource "aws_security_group_rule" "eks_api_from_vpn" {
+  type                     = "ingress"
+  from_port                = 443
+  to_port                  = 443
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.EKS-API-Access-SG.id
+  source_security_group_id = aws_security_group.vpn_security_group.id
+  description              = "Allow VPN clients to access EKS API Server"
+}
+
+##################################Creating an New IAM User#############################################
+resource "aws_iam_user" "muntaha_iam_user" {
+  name = "muntaha"
+  tags = {
+    Name = "muntaha"
+  }
+}
+
+##################################Creating an New IAM Role for the User#############################################
+resource "aws_iam_role" "muntaha-eks-iam-role" {
+  name = "muntaha-eks-iam-role"
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      { Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Sid    = ""
+        Principal = {
+          AWS = aws_iam_user.muntaha_iam_user.arn }}, ]})
+  tags = { Name= "muntaha-eks-iam-role"} 
+}
+##################################Attaching IAM User with IAM Role#############################################
+resource "aws_iam_user_policy" "IAM_User_and_Role_attachment" {
+  name = "IAM_User_and_Role_attachment"
+  user = aws_iam_user.muntaha_iam_user.name
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect   = "Allow"
+        Resource = aws_iam_role.muntaha-eks-iam-role.arn},]})
+}
+##################################Attaching IAM Role with EKS Policy attachment#############################################
+resource "aws_iam_role_policy_attachment" "attaching-IAM-role-with-eks-policy" {
+  role       = aws_iam_role.muntaha-eks-iam-role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
+}
+
+resource "aws_iam_access_key" "muntaha_iam_user_access_keys" {
+  user = aws_iam_user.muntaha_iam_user.name
+}
+
+output "muntaha_iam_user_access_keys" {
+  value = aws_iam_access_key.muntaha_iam_user_access_keys.id
+}
+
+output "muntaha_iam_user_secret_keys" {
+  value = muntaha_iam_user_secret_keys.secret
+  sensitive = true
 }
