@@ -99,16 +99,35 @@ jobs:
           echo "=== CLIENT PRIVATE KEY (BASE64 ENCODED) ==="
           terraform output -raw client_key | base64
 
-      - name: Connect to the OPEN VPN
-        env: 
-          VPN_CONFIG_B64: ${{ secrets.VPN_CONFIG_B64 }} # Do Remember once the infrastructe is deleted you have to again update the .ovpn file with the new key and certs because the secret VPN_CONFIG_64 will be outdated.
+      - name: Build VPN config file
         run: |
-          sudo apt-get update && \
-          sudo apt-get install -y openvpn openvpn-systemd-resolved
-          echo "${VPN_CONFIG_B64}" | base64 -d > vpn.ovpn
+          VPN_ID=$(aws ec2 describe-client-vpn-endpoints --query "ClientVpnEndpoints[?Description=='terraform-clientvpn-example'].ClientVpnEndpointId | [0]" --output text)
+          [ "$VPN_ID" != "None" ] || (echo "VPN endpoint not found" && exit 1)
+          aws ec2 export-client-vpn-client-configuration --client-vpn-endpoint-id "$VPN_ID" --output text > vpn.ovpn
+          {
+            echo "<cert>"
+            terraform output -raw client_cert
+            echo ""
+            echo "</cert>"
+            echo "<key>"
+            terraform output -raw client_key
+            echo ""
+            echo "</key>"
+          } >> vpn.ovpn
+
+      - name: Upload VPN config as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vpn-config
+          path: Terraform/Calling-Modules/vpn.ovpn
+          retention-days: 1
+
+      - name: Connect to VPN
+        run: |
+          sudo apt-get update && sudo apt-get install -y openvpn openvpn-systemd-resolved
           sudo openvpn --config vpn.ovpn --daemon --script-security 2 --up /etc/openvpn/update-systemd-resolved --down /etc/openvpn/update-systemd-resolved --down-pre --dhcp-option DOMAIN-ROUTE .
-          sleep 40
-          ip link show tun0 || (echo "VPN did not connect" && exit 1) # --> this line will show that the failed vpn and it didn't connected.
+          sleep 30
+          ip link show tun0 || (echo "VPN did not connect" && exit 1)
 
       - name: Apply Rbac to the cluster
         run: |
