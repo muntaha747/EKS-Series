@@ -3,7 +3,7 @@ name: 'Terraform EKS Infrastructure - With K8s Rbac'
 on:
   push:
     branches:
-      - main
+      - main #
     paths:
       - 'Terraform/**'
       - '.github/workflows/*'
