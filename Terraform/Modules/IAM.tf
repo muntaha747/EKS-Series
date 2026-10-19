@@ -67,7 +67,6 @@ resource "aws_iam_role_policy_attachment" "AmazonEKS_CNI_Policy" {
 }
 
 
-
 ##################################Creating an New IAM User#############################################
 resource "aws_iam_user" "Hassan_iam_user" {
   name = "Hassan"
@@ -78,7 +77,7 @@ resource "aws_iam_user" "Hassan_iam_user" {
 
 ##################################Creating an New IAM Role for the User#############################################
 resource "aws_iam_role" "Hassan-eks-iam-role" {
-  name = "Hassan-eks-iam-role"
+  name = "Hassan-eks-iam-role-${random_integer.suffix.result}"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -87,7 +86,7 @@ resource "aws_iam_role" "Hassan-eks-iam-role" {
         Sid    = ""
         Principal = {
           AWS = aws_iam_user.Hassan_iam_user.arn }}, ]})
-  tags = { Name= "Hassan-eks-iam-role"} 
+  tags = { Name= "Hassan-eks-iam-role-${random_integer.suffix.result}"}
 }
 ##################################Attaching IAM User with IAM Role#############################################
 resource "aws_iam_user_policy" "IAM_User_and_Role_attachment" {
@@ -102,22 +101,30 @@ resource "aws_iam_user_policy" "IAM_User_and_Role_attachment" {
         Resource = aws_iam_role.Hassan-eks-iam-role.arn},]})
 }
 ##################################Attaching IAM Role with EKS Policy attachment#############################################
-resource "aws_iam_role_policy_attachment" "attaching-IAM-role-with-eks-policy" {
-  role       = aws_iam_role.Hassan-eks-iam-role.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
+resource "aws_iam_role_policy" "attaching-IAM-role-with-eks-policy" {
+  name = "EKS-Kubectl-Access"
+  role = aws_iam_role.Hassan-eks-iam-role.id
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect   = "Allow"
+        Action   = ["eks:DescribeCluster", "eks:ListClusters"]
+        Resource = "*"
+      },
+    ]
+  })
 }
 
 resource "aws_iam_access_key" "Hassan_iam_user_access_keys" {
   user = aws_iam_user.Hassan_iam_user.name
 }
-resource "aws_iam_access_key" "Hassan_iam_user_secret_keys" {
-  user = aws_iam_user.Hassan_iam_user.name 
-}
+
 output "Hassan_iam_user_access_keys" {
   value = aws_iam_access_key.Hassan_iam_user_access_keys.id
 }
 
 output "Hassan_iam_user_secret_keys" {
-  value = aws_iam_access_key.Hassan_iam_user_secret_keys.secret
+  value = aws_iam_access_key.Hassan_iam_user_access_keys.secret
   sensitive = true
 }
