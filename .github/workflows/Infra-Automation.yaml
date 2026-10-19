@@ -1,4 +1,4 @@
-name: 'Terraform EKS Infrastructure01' 
+name: 'Terraform EKS Infrastructure - With K8s Rbac' 
 
 on:
   push:
