@@ -8,7 +8,7 @@ resource "aws_eks_cluster" "EKS-Control-Plane" {
     subnet_ids              = slice(aws_subnet.Private_Subnets[*].id, 0, 6)
     endpoint_private_access = var.endpoint_private_access
     endpoint_public_access  = var.endpoint_public_access
-    security_group_ids      = [aws_security_group.EKS-API-SG.id]
+    security_group_ids      = [aws_security_group.EKS-API-Access-SG.id]
   }
 
   access_config {
@@ -53,7 +53,7 @@ resource "aws_eks_access_entry" "Hassan-devops-engineer-entry" {
 
 
 ###############################################EKS-Security-Group###############################################
-resource "aws_security_group" "EKS-API-SG" {
+resource "aws_security_group" "EKS-API-Access-SG" {
   name        = "Security group to access Kube-Api-Server"
   description = "Inbound traffic for the worker node only https"
   vpc_id      = aws_vpc.EKS_VPC.id
@@ -64,7 +64,7 @@ resource "aws_security_group" "EKS-API-SG" {
 }
 
 resource "aws_vpc_security_group_ingress_rule" "EKS-API-SG-Ingress" {
-  security_group_id = aws_security_group.EKS-API-SG.id
+  security_group_id = aws_security_group.EKS-API-Access-SG.id
   referenced_security_group_id = aws_security_group.vpn_security_group.id
   from_port         = 443
   ip_protocol       = "tcp"
