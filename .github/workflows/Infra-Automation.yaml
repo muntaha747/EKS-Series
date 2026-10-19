@@ -102,7 +102,7 @@ jobs:
         env: 
           VPN_CONFIG_B64: ${{ secrets.VPN_CONFIG_B64 }} # Do Remember once the infrastructe is deleted you have to again update the .ovpn file with the new key and certs because the secret VPN_CONFIG_64 will be outdated.
         run: |
-          sudo apt-get update && sudo apt upgrade -y && \
+          sudo apt-get update && \
           sudo apt-get install -y openvpn openvpn-systemd-resolved
           echo "${VPN_CONFIG_B64}" | base64 -d > vpn.ovpn
           sudo openvpn --config vpn.ovpn --daemon --script-security 2 --up /etc/openvpn/update-systemd-resolved --down /etc/openvpn/update-systemd-resolved --down-pre --dhcp-option DOMAIN-ROUTE .
@@ -112,4 +112,4 @@ jobs:
       - name: Apply Rbac to the cluster
         run: |
           aws eks update-kubeconfig --name Dev-YT-Performance-Cluster --region us-east-1
-          kubectl apply -f ../Kubernetes-Manifest-File/rbac.yaml
+          kubectl apply -f ../../Kubernetes-Manifest-File/rbac.yaml
