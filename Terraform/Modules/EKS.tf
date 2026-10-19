@@ -8,7 +8,7 @@ resource "aws_eks_cluster" "EKS-Control-Plane" {
     subnet_ids              = slice(aws_subnet.Private_Subnets[*].id, 0, 6)
     endpoint_private_access = var.endpoint_private_access
     endpoint_public_access  = var.endpoint_public_access
-    security_group_ids      = [aws_security_group.EKS-API-Access-SG.id]
+    security_group_ids      = [aws_security_group.EKS-API-SGG.id]
   }
 
   access_config {
