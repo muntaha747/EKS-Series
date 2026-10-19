@@ -1,5 +1,5 @@
 apiVersion: rbac.authorization.k8s.io/v1
-Kind: ClusterRole
+kind: ClusterRole
 metadata:
   name: hassan-devops-role
 rules:
@@ -12,17 +12,16 @@ rules:
   - apiGroups: ["apps"]
     resources: ["deployments", "replicasets", "statefulsets", "daemonsets"]
     verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
-
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-
+kind: ClusterRoleBinding
 metadata:
-      name: hassan-devops-binding
+  name: hassan-devops-binding
 subjects:
-      - kind: Group
-        name: hassan-devops
-        apiGroup: rbac.authorization.k8s.io
+  - kind: Group
+    name: hassan-devops
+    apiGroup: rbac.authorization.k8s.io
 roleRef:
-      - kind: Group
-        name: hassan-devops
-        apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: hassan-devops-role
+  apiGroup: rbac.authorization.k8s.io
