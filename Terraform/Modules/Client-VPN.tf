@@ -3,7 +3,7 @@ resource "aws_security_group" "vpn_security_group" {
   description = "Allow VPN traffic to VPC"
   vpc_id      = aws_vpc.EKS_VPC.id
 
-  tags = { Env = var.env }
+  tags = { Env = var.env }#
 }
 
 # resource "aws_vpc_security_group_egress_rule" "vpn-sg-egress" {
