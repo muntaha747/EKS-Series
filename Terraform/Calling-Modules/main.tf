@@ -43,14 +43,5 @@ output "client_cert" {
   value = module.eks.client_cert
 }
 
-output "hassan_access_key_id" {
-  value     = module.eks.hassan_access_key_id
-  sensitive = true
-}
-
-output "hassan_secret_access_key" {
-  value     = module.eks.hassan_secret_access_key
-  sensitive = true
-}
 
 #This is the module calling.
