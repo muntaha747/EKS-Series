@@ -44,12 +44,12 @@ output "client_cert" {
 }
 
 output "hassan_access_key_id" {
-  value     = aws_iam_access_key.Hassan_iam_user_access_keys.id
+  value     = Modules.IAM.hassan_access_key_id
   sensitive = true
 }
 
 output "hassan_secret_access_key" {
-  value     = aws_iam_access_key.Hassan_iam_user_access_keys.secret
+  value     = Modules.IAM.hassan_secret_access_key
   sensitive = true
 }
 
