@@ -43,4 +43,14 @@ output "client_cert" {
   value = module.eks.client_cert
 }
 
+output "hassan_access_key_id" {
+  value     = aws_iam_access_key.Hassan_iam_user_access_keys.id
+  sensitive = true
+}
+
+output "hassan_secret_access_key" {
+  value     = aws_iam_access_key.Hassan_iam_user_access_keys.secret
+  sensitive = true
+}
+
 #This is the module calling.
