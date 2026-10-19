@@ -44,12 +44,12 @@ output "client_cert" {
 }
 
 output "hassan_access_key_id" {
-  value     = module.IAM.hassan_access_key_id
+  value     = module.eks.hassan_access_key_id
   sensitive = true
 }
 
 output "hassan_secret_access_key" {
-  value     = module.IAM.hassan_secret_access_key
+  value     = module.eks.hassan_secret_access_key
   sensitive = true
 }
 
