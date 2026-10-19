@@ -6,11 +6,11 @@ resource "aws_security_group" "vpn_security_group" {
   tags = { Env = var.env }
 }
 
-resource "aws_vpc_security_group_egress_rule" "vpn-sg-egress" {
-  security_group_id = aws_security_group.vpn_security_group.id
-  cidr_ipv4         = "0.0.0.0/0"
-  ip_protocol       = "-1"
-}
+# resource "aws_vpc_security_group_egress_rule" "vpn-sg-egress" {
+#   security_group_id = aws_security_group.vpn_security_group.id
+#   cidr_ipv4         = "0.0.0.0/0"
+#   ip_protocol       = "-1"
+# }
 
 ########################################################AWS Client VPN Association with the subnet##################################
 
