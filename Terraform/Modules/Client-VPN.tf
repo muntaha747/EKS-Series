@@ -3,15 +3,14 @@ resource "aws_security_group" "vpn_security_group" {
   description = "Allow VPN traffic to VPC"
   vpc_id      = aws_vpc.EKS_VPC.id
 
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
   tags = { Env = var.env }
 }
 
+resource "aws_vpc_security_group_egress_rule" "vpn-sg-egress" {
+  security_group_id = aws_security_group.vpn_security_group.id
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "-1"
+}
 
 ########################################################AWS Client VPN Association with the subnet##################################
 
@@ -20,6 +19,8 @@ resource "aws_ec2_client_vpn_endpoint" "VPN_Client" {
   server_certificate_arn = aws_acm_certificate.server_cert.arn
   client_cidr_block      = var.client_cidr_block
   vpc_id = aws_vpc.EKS_VPC.id
+  security_group_ids = [aws_security_group.vpn_security_group.id]
+  dns_servers        = ["10.0.0.2"]
   split_tunnel = true
 
   authentication_options {
@@ -36,7 +37,7 @@ resource "aws_ec2_client_vpn_endpoint" "VPN_Client" {
 
   client_login_banner_options {
     enabled = true
-    banner_text = "This AWS VPN is for authorized users only"
+    banner_text = "Welcome the Private EKS VPC"
   }
 }
 

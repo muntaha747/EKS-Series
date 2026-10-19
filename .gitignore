@@ -51,3 +51,5 @@ certs/
 *.ovpn
 downloaded-client-config.ovpn
 *.tar
+*.key
+*.cert

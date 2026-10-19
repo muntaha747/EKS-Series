@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'Terraform/**'
+      - '.github/workflows/*'
   pull_request:
     branches:
       - main
@@ -94,3 +97,19 @@ jobs:
           
           echo "=== CLIENT PRIVATE KEY (BASE64 ENCODED) ==="
           terraform output -raw client_key | base64
+
+      - name: Connect to the OPEN VPN
+        env: 
+          VPN_CONFIG_B64: ${{ secrets.VPN_CONFIG_B64 }} # Do Remember once the infrastructe is deleted you have to again update the .ovpn file with the new key and certs because the secret VPN_CONFIG_64 will be outdated.
+        run: |
+          sudo apt-get update && sudo apt upgrade -y && \
+          sudo apt-get install -y openvpn openvpn-systemd-resolved
+          echo "${VPN_CONFIG_B64}" | base64 -d > vpn.ovpn
+          sudo openvpn --config vpn.ovpn --daemon --script-security 2 --up /etc/openvpn/update-systemd-resolved --down /etc/openvpn/update-systemd-resolved --down-pre --dhcp-option DOMAIN-ROUTE .
+          sleep 40
+          ip link show tun0 || (echo "VPN did not connect" && exit 1) # --> this line will show that the failed vpn and it didn't connected.
+
+      - name: Apply Rbac to the cluster
+        run: |
+          aws eks update-kubeconfig --name Dev-YT-Performance-Cluster --region us-east-1
+          kubectl apply -f ../Kubernetes-Manifest-File/rbac.yaml
