@@ -34,7 +34,7 @@ module "eks" {
 }
 
 
-output "client_key" {
+output "client_key" {#
   value     = module.eks.client_key
   sensitive = true
 }
