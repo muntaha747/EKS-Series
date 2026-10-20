@@ -16,8 +16,6 @@ jobs:
     name: 'Terraform Destroy'
     runs-on: ubuntu-latest
     if: github.event.inputs.confirm == 'destroy'
-
-    # With "Required reviewers" set on Prod, this pauses for approval before destroying.
     environment: Prod
 
     defaults:
@@ -42,20 +40,34 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
-      - name: Delete leftover access keys of the Hassan user
+      # Combined Step: VPN + K8s Cleanup + IAM Cleanup
+      - name: Cleanup Resources Before Destroy
         run: |
-          for KEY in $(aws iam list-access-keys --user-name Hassan --query 'AccessKeyMetadata[].AccessKeyId' --output text 2>/dev/null); do
-            aws iam delete-access-key --user-name Hassan --access-key-id "$KEY"
-          done || true
-
-      - name: Delete SA, Pods, and RBAC
-        run: |
-          aws eks update-kubeconfig --name Dev-YT-Performance-Cluster --region us-east-1
+          # 1. Setup & Connect VPN
+          VPN_ID=$(aws ec2 describe-client-vpn-endpoints --query "ClientVpnEndpoints[?Description=='terraform-clientvpn-example'].ClientVpnEndpointId | [0]" --output text)
+          aws ec2 export-client-vpn-client-configuration --client-vpn-endpoint-id "$VPN_ID" --output text > vpn.ovpn
           
-          kubectl delete sa s3-access-sa --ignore-not-found
-          kubectl delete pod aws-cli-pod --ignore-not-found
-          kubectl delete clusterrole hassan-devops-role --ignore-not-found
-          kubectl delete clusterrolebinding hassan-devops-binding --ignore-not-found
+          terraform output -raw client_cert > /tmp/client.crt
+          terraform output -raw client_key > /tmp/client.key
+          { echo "<cert>"; cat /tmp/client.crt; echo ""; echo "</cert>"; echo "<key>"; cat /tmp/client.key; echo ""; echo "</key>"; } >> vpn.ovpn
+          
+          sudo apt-get update && sudo apt-get install -y openvpn openvpn-systemd-resolved > /dev/null 2>&1
+          sudo openvpn --config vpn.ovpn --daemon --script-security 2 --up /etc/openvpn/update-systemd-resolved --down /etc/openvpn/update-systemd-resolved --down-pre --dhcp-option DOMAIN-ROUTE .
+          sleep 15
+          sudo ip route add 10.0.0.0/16 dev tun0 || true
 
+          # 2. Delete Kubernetes Resources (failsafe added)
+          aws eks update-kubeconfig --name Dev-YT-Performance-Cluster --region us-east-1
+          kubectl delete sa s3-access-sa --ignore-not-found || true
+          kubectl delete pod aws-cli-pod --ignore-not-found || true
+          kubectl delete clusterrole hassan-devops-role --ignore-not-found || true
+          kubectl delete clusterrolebinding hassan-devops-binding --ignore-not-found || true
+
+          # 3. Delete IAM Access Keys (Change 'Hassan' to 'muntaha' if that's your user)
+          for KEY in $(aws iam list-access-keys --user-name Hassan --query 'AccessKeyMetadata[].AccessKeyId' --output text 2>/dev/null); do
+            aws iam delete-access-key --user-name Hassan --access-key-id "$KEY" || true
+          done
+
+      # Final Step: Destroy Everything with Terraform
       - name: Terraform Destroy
         run: terraform destroy -auto-approve -lock-timeout=300s -var-file="test.tfvars"
