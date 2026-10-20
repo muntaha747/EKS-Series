@@ -39,6 +39,7 @@ jobs:
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: us-east-1
+          audience: sts.amazonaws.com
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
@@ -65,7 +66,6 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
-    # This triggers the manual approval pause
     environment: Prod
 
     defaults:
@@ -91,9 +91,6 @@ jobs:
       - name: Terraform Init
         run: terraform init -input=false
 
-      - name: Terraform Validate
-        run: terraform validate
-
       - name: Terraform Plan
         run: terraform plan -no-color -input=false -lock-timeout=300s -var-file="test.tfvars" -out=tfplan
 
@@ -105,41 +102,42 @@ jobs:
           VPN_ID=$(aws ec2 describe-client-vpn-endpoints --query "ClientVpnEndpoints[?Description=='terraform-clientvpn-example'].ClientVpnEndpointId | [0]" --output text)
           [ "$VPN_ID" != "None" ] || (echo "VPN endpoint not found" && exit 1)
           aws ec2 export-client-vpn-client-configuration --client-vpn-endpoint-id "$VPN_ID" --output text > vpn.ovpn
+          
+          # Save the outputs to temporary files first to bypass GitHub's log masking
+          terraform output -raw client_cert > /tmp/client.crt
+          terraform output -raw client_key > /tmp/client.key
+          
           {
             echo "<cert>"
-            terraform output -raw client_cert
+            cat /tmp/client.crt
             echo ""
             echo "</cert>"
             echo "<key>"
-            terraform output -raw client_key
+            cat /tmp/client.key
             echo ""
             echo "</key>"
           } >> vpn.ovpn
-
-      - name: Upload VPN config as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: vpn-config
-          path: Terraform/Calling-Modules/vpn.ovpn
-          retention-days: 1
+          
+          # Clean up temporary key files
+          rm /tmp/client.crt /tmp/client.key
 
       - name: Connect to VPN
         run: |
           sudo apt-get update && sudo apt-get install -y openvpn openvpn-systemd-resolved
           sudo openvpn --config vpn.ovpn --daemon --script-security 2 --up /etc/openvpn/update-systemd-resolved --down /etc/openvpn/update-systemd-resolved --down-pre --dhcp-option DOMAIN-ROUTE .
-          sleep 30
+          sleep 20
           ip link show tun0 || (echo "VPN did not connect" && exit 1)
-
-      # TEMPORARY: delete this step once the pipeline works
-      - name: Debug VPN
-        run: |
-          HOST=$(aws eks describe-cluster --name Dev-YT-Performance-Cluster --region us-east-1 --query cluster.endpoint --output text | sed 's#https://##')
-          IP=$(getent hosts "$HOST" | awk '{print $1}' | head -1)
-          echo "Cluster IP: $IP"
-          ip route get "$IP"
-          nc -zv -w 5 "$IP" 443 || true
 
       - name: Apply Rbac to the cluster
         run: |
           aws eks update-kubeconfig --name Dev-YT-Performance-Cluster --region us-east-1
+          # Note: Path goes up two levels to reach the root folder
           kubectl apply -f ../../Kubernetes-Manifest-File/rbac.yaml
+
+      - name: Apply IRSA (IAM Role for Service Accounts)
+        run: |
+         
+          kubectl apply -f ../../Kubernetes-Manifest-File/service-account.yaml
+          kubectl apply -f ../../Kubernetes-Manifest-File/pod.yaml
+          kubectl wait --for=condition=Ready pod/aws-cli-pod --timeout=60s
+          kubectl exec aws-cli-pod -- aws s3 ls

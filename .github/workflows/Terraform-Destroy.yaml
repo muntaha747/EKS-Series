@@ -48,5 +48,14 @@ jobs:
             aws iam delete-access-key --user-name Hassan --access-key-id "$KEY"
           done || true
 
+      - name: Delete SA, Pods, and RBAC
+        run: |
+          aws eks update-kubeconfig --name Dev-YT-Performance-Cluster --region us-east-1
+          
+          kubectl delete sa s3-access-sa --ignore-not-found
+          kubectl delete pod aws-cli-pod --ignore-not-found
+          kubectl delete clusterrole hassan-devops-role --ignore-not-found
+          kubectl delete clusterrolebinding hassan-devops-binding --ignore-not-found
+
       - name: Terraform Destroy
         run: terraform destroy -auto-approve -lock-timeout=300s -var-file="test.tfvars"
