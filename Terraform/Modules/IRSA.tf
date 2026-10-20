@@ -21,25 +21,16 @@ resource "aws_iam_policy" "IRSA-S3-Permission-Policy" {
   description = "Policy for IRSA Pod to access S3"
 
   policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Effect = "Allow"
-        Action = [
-            "s3:ListBucket",
-            "s3:GetBucketLocation",
-            "s3:GetObject",
-            "s3:GetObjectVersion",
-            "s3:GetObjectTagging",
-            "s3:PutObject",
-            "s3:PutObjectTagging",
-            "s3:DeleteObject",
-            "s3:DeleteObjectVersion",
-            "s3:AbortMultipartUpload",
-            "s3:ListMultipartUploadParts"
-        ]
-        Resource = "*"
-      }
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:*",
+                "s3-object-lambda:*"
+            ],
+            "Resource": "*"
+        }
     ]
   })
 }
